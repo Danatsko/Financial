@@ -1,5 +1,7 @@
 from django.db import models
 
+from transactions.managers import TransactionManager
+
 
 class TransactionType(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -25,6 +27,8 @@ class Transaction(models.Model):
     description = models.CharField(max_length=250)
     category = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='transactions')
     creation_date = models.DateTimeField()
+
+    objects = TransactionManager()
 
     def __str__(self):
         return f"Transaction \"{self.title[:10]}...\" from {self.user_id} for {self.creation_date}"
