@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from achievements.models import (
+    TransactionType,
+    TransactionCategory,
+    Achievement
+)
+
+admin.site.register(TransactionType)
+admin.site.register(TransactionCategory)
+admin.site.register(Achievement)
