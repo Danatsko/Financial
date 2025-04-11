@@ -11,3 +11,12 @@ class Users(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class ClientProfile(models.Model):
+    user = models.OneToOneField(Users, on_delete=models.CASCADE, related_name='client_profile')
+    balance = models.FloatField()
+    monthly_budget = models.FloatField()
+
+    def __str__(self):
+        return f"ClientProfile for {self.user.email}."
