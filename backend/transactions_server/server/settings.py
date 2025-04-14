@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'oauth2_provider',
+    'rest_framework',
 
     'users.apps.UsersConfig',
     'transactions.apps.TransactionsConfig',
@@ -139,4 +140,13 @@ OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
     "SCOPES": {},
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
