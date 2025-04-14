@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     'oauth2_provider',
     'rest_framework',
+    'health_check',
+    'health_check.db',
 
     'users.apps.UsersConfig',
     'transactions.apps.TransactionsConfig',
