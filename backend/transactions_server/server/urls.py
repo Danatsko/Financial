@@ -23,4 +23,5 @@ from django.urls import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('api/health/', include('health_check.urls')),
 ]
