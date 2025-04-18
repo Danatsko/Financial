@@ -141,7 +141,21 @@ AUTH_USER_MODEL = 'users.Users'
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
-    "SCOPES": {},
+    "SCOPES": {
+        "transactions:own:all:delete": "Allows deleting all of the user's own transactions.",
+        "transactions:own:list:read": "Allows reading a list of the user's own transactions.",
+        "transactions:own:item:create": "Allows creating a single transaction item for the user.",
+        "transactions:own:item:update": "Allows updating a single transaction item belonging to the user.",
+        "transactions:own:item:delete": "Allows deleting a single transaction item belonging to the user.",
+        "transactions:own:analytics:read": "Allows reading analytics data for the user's own transactions.",
+
+        "svc:transactions:own:all:delete": "Service scope: Allows deleting all of a specific user's transactions.",
+        "svc:transactions:own:list:read": "Service scope: Allows reading a list of a specific user's transactions.",
+        "svc:transactions:own:item:create": "Service scope: Allows creating a single transaction item for a specific user.",
+        "svc:transactions:own:item:update": "Service scope: Allows updating a single transaction item belonging to a specific user.",
+        "svc:transactions:own:item:delete": "Service scope: Allows deleting a single transaction item belonging to a specific user.",
+        "svc:transactions:own:analytics:read": "Service scope: Allows reading analytics data for a specific user's transactions.",
+    },
 }
 
 REST_FRAMEWORK = {
