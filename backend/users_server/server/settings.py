@@ -141,14 +141,33 @@ AUTH_USER_MODEL = 'users.Users'
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
-    "SCOPES": {},
+    "SCOPES": {
+        "users:own:profile:create": "Allows creating the user's own profile.",
+        "users:own:profile:read": "Allows reading the user's own profile.",
+        "users:own:profile:update": "Allows updating the user's own profile.",
+        "users:own:profile:delete": "Allows deleting the user's own profile.",
+
+        "achievements:own:list:read": "Allows reading a list of the user's own achievements.",
+        "achievements:own:item:update": "Allows updating a single achievement item belonging to the user.",
+
+        "svc:users:own:profile:create": "Service scope: Allows creating a specific user's profile.",
+        "svc:users:own:profile:read": "Service scope: Allows reading a specific user's profile.",
+        "svc:users:own:profile:update": "Service scope: Allows updating a specific user's profile.",
+        "svc:users:own:profile:delete": "Service scope: Allows deleting a specific user's profile.",
+
+        "svc:achievements:own:list:read": "Service scope: Allows reading a list of a specific user's achievements.",
+        "svc:achievements:own:item:update": "Service scope: Allows updating a single achievement item belonging to a specific user.",
+    },
 }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'server.authentication.GatewayTokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
+USERS_APPLICATION_CLIENT_IDS = env.list('USERS_APPLICATION_CLIENT_IDS')
