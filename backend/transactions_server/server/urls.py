@@ -19,9 +19,16 @@ from django.urls import (
     path,
     include
 )
+from rest_framework.routers import DefaultRouter
+
+from transactions.views import TransactionViewSet
+
+transaction_router = DefaultRouter()
+transaction_router.register(r'transactions', TransactionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('api/health/', include('health_check.urls')),
+    path('api/', include(transaction_router.urls)),
 ]
