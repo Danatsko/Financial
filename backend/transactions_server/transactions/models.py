@@ -23,8 +23,8 @@ class Transaction(models.Model):
     type = models.ForeignKey(TransactionType, on_delete=models.CASCADE, related_name='transactions')
     amount = models.FloatField()
     title = models.CharField(max_length=250)
-    payment_method = models.CharField(max_length=250)
-    description = models.CharField(max_length=250)
+    payment_method = models.CharField(max_length=250, blank=True)
+    description = models.CharField(max_length=250, blank=True)
     category = models.ForeignKey(TransactionCategory, on_delete=models.CASCADE, related_name='transactions')
     creation_date = models.DateTimeField()
 
