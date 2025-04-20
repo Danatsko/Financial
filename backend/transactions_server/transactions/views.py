@@ -102,7 +102,7 @@ class TransactionViewSet(
                     }
 
                 if interval.days == 0:
-                    type_time_data = type_qs.aggregate_by_hour()
+                    type_time_data = type_qs.aggregate_by_hour(start_date)
                 else:
                     type_time_data = type_qs.aggregate_by_day(start_date, end_date)
 
