@@ -168,3 +168,10 @@ REST_FRAMEWORK = {
 }
 
 GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Financial: transactions server',
+    'DESCRIPTION': 'Transactions server',
+    'VERSION': '0.0.0',
+    'SERVE_IN_SCHEMA': False,
+}
