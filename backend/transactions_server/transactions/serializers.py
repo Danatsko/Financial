@@ -81,3 +81,18 @@ class TransactionReadSerializer(serializers.ModelSerializer):
             'creation_date'
         )
         read_only_fields = ('__all__',)
+
+
+class DateRangeSerializer(serializers.Serializer):
+    start_date = serializers.DateTimeField(required=True)
+    end_date = serializers.DateTimeField(required=True)
+
+    def validate(self, data):
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+
+        if start_date and end_date:
+            if start_date > end_date:
+                raise serializers.ValidationError("start_date cannot be greater than end_date")
+
+        return data
