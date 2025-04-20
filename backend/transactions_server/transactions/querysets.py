@@ -19,7 +19,7 @@ from django.db.models.functions import (
 
 
 class TransactionQuerySet(models.QuerySet):
-    def aggregate_by_hour(self):
+    def aggregate_by_hour(self, start_date):
         annotated_qs = self.annotate(
             hour=ExtractHour('creation_date'),
             minute=ExtractMinute('creation_date'),
@@ -39,10 +39,31 @@ class TransactionQuerySet(models.QuerySet):
         aggregated = annotated_qs.values('bucket_hour').annotate(
             total_amount=Sum('amount')
         ).order_by('bucket_hour')
-        hourly_data = {hour: 0 for hour in range(25)}
+        day_start = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+        hourly_data = {}
+
+        for h in range(24):
+            hour_dt = day_start + datetime.timedelta(hours=h)
+            key = hour_dt.isoformat()
+            hourly_data[key] = 0
+
+        next_day_start = day_start + datetime.timedelta(days=1)
+        key_24 = next_day_start.isoformat()
+        hourly_data[key_24] = 0
 
         for entry in aggregated:
-            hourly_data[entry['bucket_hour']] = entry['total_amount']
+            int_hour = entry['bucket_hour']
+            total_amount = entry['total_amount']
+
+            if 0 <= int_hour < 24:
+                bucket_dt = day_start + datetime.timedelta(hours=int_hour)
+                key = bucket_dt.isoformat()
+            elif int_hour == 24:
+                key = next_day_start.isoformat()
+            else:
+                continue
+
+            hourly_data[key] = total_amount
 
         return hourly_data
 
