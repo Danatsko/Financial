@@ -55,3 +55,29 @@ class TransactionWriteSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("Invalid type name provided.")
 
         return data
+
+
+class TransactionReadSerializer(serializers.ModelSerializer):
+    type = serializers.SlugRelatedField(
+        queryset=TransactionType.objects.all(),
+        slug_field='name'
+    )
+    category = serializers.SlugRelatedField(
+        queryset=TransactionCategory.objects.all(),
+        slug_field='name'
+    )
+
+    class Meta:
+        model = Transaction
+        fields = (
+            'id',
+            'user_id',
+            'type',
+            'amount',
+            'title',
+            'payment_method',
+            'description',
+            'category',
+            'creation_date'
+        )
+        read_only_fields = ('__all__',)
