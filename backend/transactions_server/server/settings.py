@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'health_check',
     'health_check.db',
+    'drf_spectacular',
 
     'users.apps.UsersConfig',
     'transactions.apps.TransactionsConfig',
@@ -165,6 +166,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Financial: transactions server',
+    'DESCRIPTION': 'Transactions server',
+    'VERSION': '0.0.0',
+    'SERVE_IN_SCHEMA': False,
+}
