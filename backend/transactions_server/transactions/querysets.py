@@ -16,6 +16,7 @@ from django.db.models.functions import (
     ExtractSecond,
     TruncDate
 )
+from django.utils import timezone
 
 
 class TransactionQuerySet(models.QuerySet):
@@ -74,14 +75,30 @@ class TransactionQuerySet(models.QuerySet):
             total_amount=Sum('amount')
         ).order_by('day')
         daily_data = {}
-        current_date = start_date.date()
-        end_date_only = end_date.date()
+        current_date = start_date
+        end_date_only = end_date
 
         while current_date <= end_date_only:
             daily_data[current_date.isoformat()] = 0
             current_date += datetime.timedelta(days=1)
 
         for entry in daily_aggregation:
-            daily_data[entry['day'].isoformat()] = entry['total_amount']
+            date_obj = entry['day']
+            total_amount = entry['total_amount']
+
+            if isinstance(date_obj, datetime.date):
+                day_start_aware = timezone.make_aware(
+                    datetime.datetime.combine(date_obj, datetime.time.min),
+                    timezone.get_current_timezone()
+                )
+                day_start_utc = day_start_aware.astimezone(timezone.utc)
+            elif isinstance(date_obj, datetime.datetime) and timezone.is_naive(date_obj):
+                day_start_aware = timezone.make_aware(date_obj, timezone.get_current_timezone())
+                day_start_utc = day_start_aware.astimezone(timezone.utc)
+            else:
+                continue
+
+            key = day_start_utc.isoformat(timespec='seconds').replace('+00:00', 'Z')
+            daily_data[key] = total_amount
 
         return daily_data
