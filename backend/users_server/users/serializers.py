@@ -57,3 +57,21 @@ class UserClientProfileWriteSerializer(serializers.ModelSerializer):
         profile.save()
 
         return instance
+
+
+class UserClientProfileReadSerializer(serializers.ModelSerializer):
+    balance = serializers.FloatField(source='client_profile.balance')
+    monthly_budget = serializers.FloatField(source='client_profile.monthly_budget')
+    date_joined = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%SZ')
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'email',
+            'balance',
+            'monthly_budget',
+            'date_joined'
+        )
+        read_only_fields = ('__all__',)
