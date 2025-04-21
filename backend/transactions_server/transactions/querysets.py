@@ -44,11 +44,11 @@ class TransactionQuerySet(models.QuerySet):
 
         for h in range(24):
             hour_dt = day_start + datetime.timedelta(hours=h)
-            key = hour_dt.isoformat()
+            key = hour_dt.isoformat(timespec='seconds').replace('+00:00', 'Z')
             hourly_data[key] = 0
 
         next_day_start = day_start + datetime.timedelta(days=1)
-        key_24 = next_day_start.isoformat()
+        key_24 = next_day_start.isoformat(timespec='seconds').replace('+00:00', 'Z')
         hourly_data[key_24] = 0
 
         for entry in aggregated:
@@ -57,9 +57,9 @@ class TransactionQuerySet(models.QuerySet):
 
             if 0 <= int_hour < 24:
                 bucket_dt = day_start + datetime.timedelta(hours=int_hour)
-                key = bucket_dt.isoformat()
+                key = bucket_dt.isoformat(timespec='seconds').replace('+00:00', 'Z')
             elif int_hour == 24:
-                key = next_day_start.isoformat()
+                key = next_day_start.isoformat(timespec='seconds').replace('+00:00', 'Z')
             else:
                 continue
 
