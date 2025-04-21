@@ -19,9 +19,16 @@ from django.urls import (
     path,
     include
 )
+from rest_framework.routers import DefaultRouter
+
+from users.views import UserClientProfileViewSet
+
+user_router = DefaultRouter()
+user_router.register(r'users', UserClientProfileViewSet, basename='users')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('api/health/', include('health_check.urls')),
+    path('api/', include(user_router.urls)),
 ]
