@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'health_check',
     'health_check.db',
+    'drf_spectacular',
 
     'users.apps.UsersConfig',
     'achievements.apps.AchievementsConfig',
