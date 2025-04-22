@@ -15,7 +15,7 @@ class AchievementWriteSerializer(serializers.ModelSerializer):
 
 
 class AchievementReadSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(source='user.user')
+    user_id = serializers.PrimaryKeyRelatedField(source='user.user', read_only=True)
     category = serializers.SlugRelatedField(
         queryset=TransactionCategory.objects.all(),
         slug_field='name'
