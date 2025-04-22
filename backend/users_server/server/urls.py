@@ -21,14 +21,16 @@ from django.urls import (
 )
 from rest_framework.routers import DefaultRouter
 
+from achievements.views import AchievementViewSet
 from users.views import UserClientProfileViewSet
 
-user_router = DefaultRouter()
-user_router.register(r'users', UserClientProfileViewSet, basename='users')
+router = DefaultRouter()
+router.register(r'users', UserClientProfileViewSet, basename='users')
+router.register(r'achievements', AchievementViewSet, basename='achievements')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('api/health/', include('health_check.urls')),
-    path('api/', include(user_router.urls)),
+    path('api/', include(router.urls)),
 ]
