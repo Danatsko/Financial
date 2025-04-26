@@ -63,7 +63,9 @@ class UserClientProfileViewSet(
             serializer.is_valid(raise_exception=True)
             serializer.save()
 
-            response_data = {'user': serializer.data}
+            detail_serializer = UserClientProfileReadSerializer(request.user)
+
+            response_data = {'user': detail_serializer.data}
 
             return Response(response_data)
         elif request.method == 'DELETE':
