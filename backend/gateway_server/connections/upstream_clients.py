@@ -7,6 +7,14 @@ from exceptions.exceptions import (
     GatewayUnexpectedError,
     GatewayBadGatewayError
 )
+from settings import settings
+from transactions.annotations import PostTransactionRequestBody
+from users.annotations import (
+    PostRegistrationRequestBody,
+    PostLoginRequestBody,
+    PostRefreshTokenRequestBody,
+    PatchMeRequestBody
+)
 
 
 class BaseUpstreamClient:
@@ -89,3 +97,135 @@ class BaseUpstreamClient:
 
     async def aclose(self):
         await self._client.aclose()
+
+
+class UsersUpstreamClient(BaseUpstreamClient):
+    @property
+    def post_registration_path(self) -> str: return "users/"
+
+    @property
+    def post_login_path(self) -> str: return "o/token/"
+
+    @property
+    def post_logout_path(self) -> str: return "o/revoke_token/"
+
+    @property
+    def post_refresh_token_path(self) -> str: return "o/token/"
+
+    @property
+    def get_me_path(self) -> str: return "users/me/"
+
+    @property
+    def patch_me_path(self) -> str: return "users/me/"
+
+    @property
+    def delete_me_path(self) -> str: return "users/me/"
+
+    @property
+    def get_achievements_path(self) -> str: return "achievements/"
+
+    @property
+    def patch_increment_achievement_value_path(self) -> str: return "achievements/increment_achievement_value/"
+
+    async def post_registration(
+            self,
+            user_data: PostRegistrationRequestBody
+    ) -> httpx.Response:
+        return await self.post(
+            self.post_registration_path,
+            json=user_data.model_dump()
+        )
+
+    async def post_login(
+            self,
+            user_data: PostLoginRequestBody
+    ) -> httpx.Response:
+        return await self.post(
+            self.post_login_path,
+            data={
+                'grant_type': 'password',
+                'username': user_data.email,
+                'password': user_data.password,
+                "scope": "read write user_access users"
+            },
+            auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
+        )
+
+    async def post_logout(
+            self,
+            user_authorization_token: str
+    ) -> httpx.Response:
+        return await self.post(
+            self.post_logout_path,
+            data={
+                'token': user_authorization_token,
+                'token_type_hint': 'refresh_token'
+            },
+            auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
+        )
+
+    async def post_refresh_token(
+            self,
+            refresh_token_data: PostRefreshTokenRequestBody
+    ) -> httpx.Response:
+        return await self.post(
+            self.post_refresh_token_path,
+            data={
+                'grant_type': 'refresh_token',
+                'refresh_token': refresh_token_data.refresh_token,
+                "scope": "read write user_access users"
+            },
+            auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
+        )
+
+    async def get_me(
+            self,
+            user_authorization_token: str
+    ) -> httpx.Response:
+        return await self.get(
+            self.get_me_path,
+            headers={"X-User-Authorization": f"Bearer {user_authorization_token}"}
+        )
+
+    async def patch_me(
+            self,
+            user_authorization_token: str,
+            new_user_data: PatchMeRequestBody
+    ) -> httpx.Response:
+        return await self.patch(
+            self.patch_me_path,
+            headers={"X-User-Authorization": f"Bearer {user_authorization_token}"},
+            json=new_user_data.model_dump(
+                exclude_unset=True,
+                exclude_none=True
+            )
+        )
+
+    async def delete_me(
+            self,
+            user_authorization_token: str
+    ) -> httpx.Response:
+        return await self.delete(
+            self.delete_me_path,
+            headers={"X-User-Authorization": f"Bearer {user_authorization_token}"}
+        )
+
+    async def get_achievements(
+            self,
+            user_authorization_token: str
+    ) -> httpx.Response:
+        return await self.get(
+            self.get_achievements_path,
+            headers={"X-User-Authorization": f"Bearer {user_authorization_token}"}
+        )
+
+    async def patch_increment_achievement_value(
+            self,
+            user_authorization_token: str,
+            transaction_data: PostTransactionRequestBody
+    ) -> httpx.Response:
+        return await self.patch(
+            self.patch_increment_achievement_value_path,
+            headers={"X-User-Authorization": f"Bearer {user_authorization_token}"},
+            json={'category': transaction_data.model_dump(mode='json')['category']}
+        )
