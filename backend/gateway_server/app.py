@@ -3,10 +3,14 @@ from fastapi import (
     APIRouter
 )
 
+from exceptions.exception_handlers import gateway_exception_handler
+from exceptions.exceptions import GatewayException
 from transactions.routes import transactions_router
 from users.routes import users_router
 
 app = FastAPI()
+
+app.add_exception_handler(GatewayException, gateway_exception_handler)
 
 api_router = APIRouter(prefix="/api")
 
