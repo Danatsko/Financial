@@ -13,7 +13,12 @@ from connections.upstream_clients import (
     TransactionsUpstreamClient
 )
 from connections.upstream_connection_managers import UpstreamConnectionManager
+from exceptions.exceptions import (
+    GatewayBadGatewayError,
+    GatewayUnexpectedError
+)
 from settings import settings
+from users.annotations import AuthHeader
 
 
 def get_users_upstream_connection_manager(request: Request) -> UpstreamConnectionManager:
@@ -98,3 +103,41 @@ async def get_redis_client(manager: RedisConnectionManager = Depends(get_redis_c
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="The service is currently unavailable. Please try again later."
         )
+
+
+async def get_user_authorization_token(
+    user_authorization_token: AuthHeader,
+    redis_client: RedisClient = Depends(get_redis_client)
+) -> str:
+    parts = user_authorization_token.split()
+
+    if len(parts) != 2 or parts[0].lower() != "bearer":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid Authorization header format. Expected 'Bearer <token>'."
+        )
+
+    token = parts[1]
+
+    user_data = None
+
+    try:
+        user_data = await redis_client.retrieve_token_data(token)
+    except (GatewayBadGatewayError, GatewayUnexpectedError):
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Authentication service currently unavailable."
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An unexpected authentication error occurred."
+        )
+
+    if not user_data:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token."
+        )
+
+    return token
