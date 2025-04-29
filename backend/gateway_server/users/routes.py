@@ -1,3 +1,8 @@
-from fastapi import APIRouter
+from fastapi import (
+    APIRouter,
+    Depends
+)
 
-users_router = APIRouter()
+from dependencies import ensure_users_token_is_fresh
+
+users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
