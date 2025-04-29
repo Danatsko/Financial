@@ -141,3 +141,31 @@ async def get_user_authorization_token(
         )
 
     return token
+
+
+async def ensure_users_token_is_fresh(
+    client: UsersUpstreamClient = Depends(get_users_upstream_client)
+) -> UsersUpstreamClient:
+    try:
+        await client.ensure_token_is_fresh()
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to refresh users service token"
+        )
+
+    return client
+
+
+async def ensure_transactions_token_is_fresh(
+    client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client)
+) -> TransactionsUpstreamClient:
+    try:
+        await client.ensure_token_is_fresh()
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to refresh transactions service token"
+        )
+
+    return client
