@@ -151,7 +151,7 @@ class UsersUpstreamClient(BaseUpstreamClient):
                 'grant_type': 'password',
                 'username': user_data.email,
                 'password': user_data.password,
-                "scope": "read write user_access users"
+                "scope": settings.users_server_users_scopes
             },
             auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
         )
@@ -178,7 +178,7 @@ class UsersUpstreamClient(BaseUpstreamClient):
             data={
                 'grant_type': 'refresh_token',
                 'refresh_token': refresh_token_data.refresh_token,
-                "scope": "read write user_access users"
+                "scope": settings.users_server_users_scopes
             },
             auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
         )
