@@ -15,13 +15,15 @@ from dependencies import (
 from users.annotations import (
     PostRegistrationRequestBody,
     PostLoginRequestBody,
-    PostRefreshTokenRequestBody
+    PostRefreshTokenRequestBody,
+    PatchMeRequestBody
 )
 from users.models import (
     PostRegistrationResponse,
     PostLoginResponse,
     PostRefreshTokenResponse,
-    GetMeResponse
+    GetMeResponse,
+    PatchMeResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -153,3 +155,42 @@ async def get_me(
     get_user_response_dict = get_user_response.json()
 
     return GetMeResponse(**get_user_response_dict)
+
+
+@users_router.patch(
+    "/me/",
+    status_code=status.HTTP_200_OK,
+    response_model=PatchMeResponse
+)
+async def patch_user(
+        new_user_data: PatchMeRequestBody,
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    update_user_response = await users_client.patch_me(user_authorization_token, new_user_data)
+
+    update_user_response_dict = update_user_response.json()
+
+    user_details_for_cache = None
+
+    if update_user_response_dict and 'user' in update_user_response_dict:
+        user_details_for_cache = update_user_response_dict['user']
+    else:
+        try:
+            get_me_response = await users_client.get_me(user_authorization_token)
+
+            get_me_response_data = get_me_response.json()
+
+            if get_me_response_data and 'user' in get_me_response_data:
+                user_details_for_cache = get_me_response_data['user']
+        except Exception:
+            user_details_for_cache = None
+
+    if user_details_for_cache:
+        await redis_client.update_token_data(
+            token=user_authorization_token,
+            new_data=user_details_for_cache,
+        )
+
+    return PatchMeResponse(**update_user_response_dict)
