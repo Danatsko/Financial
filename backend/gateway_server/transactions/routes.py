@@ -22,7 +22,8 @@ from transactions.annotations import (
 )
 from transactions.models import (
     PostTransactionResponse,
-    GetTransactionsDataResponse
+    GetTransactionsDataResponse,
+    GetAnalyseDataResponse
 )
 
 transactions_router = APIRouter(dependencies=[Depends(ensure_transactions_token_is_fresh)])
@@ -75,3 +76,26 @@ async def get_transactions_data(
     get_transactions_data_response_dict = get_transactions_data_response.json()
 
     return GetTransactionsDataResponse(**get_transactions_data_response_dict)
+
+
+@transactions_router.get(
+    "/get_analyse_data/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetAnalyseDataResponse
+)
+async def get_analyse_data(
+        date_range: GetDateRangeRequestParamsQuery,
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    user_id = await redis_client.retrieve_token_field(
+        token=user_authorization_token,
+        field='id'
+    )
+
+    get_analyse_data_response = await transactions_client.get_analyse_data(user_id, date_range)
+
+    get_analyse_data_response_dict = get_analyse_data_response.json()
+
+    return GetAnalyseDataResponse(**get_analyse_data_response_dict)
