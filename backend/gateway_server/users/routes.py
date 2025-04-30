@@ -11,8 +11,14 @@ from dependencies import (
     get_redis_client,
     get_users_upstream_client
 )
-from users.annotations import PostRegistrationRequestBody
-from users.models import PostRegistrationResponse
+from users.annotations import (
+    PostRegistrationRequestBody,
+    PostLoginRequestBody
+)
+from users.models import (
+    PostRegistrationResponse,
+    PostLoginResponse
+)
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
 
@@ -44,3 +50,33 @@ async def registration(
     tokens_response_dict = tokens_response.json()
 
     return PostRegistrationResponse(**tokens_response_dict)
+
+
+@users_router.post(
+    "/login/",
+    status_code=status.HTTP_200_OK,
+    response_model=PostLoginResponse
+)
+async def login(
+        user_data: PostLoginRequestBody,
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    tokens_response = await users_client.post_login(user_data)
+
+    access_token = tokens_response.json()['access_token']
+    expires_in = tokens_response.json()['expires_in']
+
+    user_data_response = await users_client.get_me(access_token)
+
+    user = user_data_response.json()['user']
+
+    await redis_client.cache_token_data(
+        token=access_token,
+        data=user,
+        ttl=expires_in
+    )
+
+    tokens_response_dict = tokens_response.json()
+
+    return PostLoginResponse(**tokens_response_dict)
