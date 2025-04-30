@@ -20,7 +20,8 @@ from users.annotations import (
 from users.models import (
     PostRegistrationResponse,
     PostLoginResponse,
-    PostRefreshTokenResponse
+    PostRefreshTokenResponse,
+    GetMeResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -130,3 +131,25 @@ async def refresh_token(
     tokens_response_dict = tokens_response.json()
 
     return PostRefreshTokenResponse(**tokens_response_dict)
+
+
+@users_router.get(
+    "/me/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetMeResponse
+)
+async def get_me(
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    user_data = await redis_client.retrieve_token_data(user_authorization_token)
+
+    if user_data:
+        return GetMeResponse(user=user_data)
+
+    get_user_response = await users_client.get_me(user_authorization_token)
+
+    get_user_response_dict = get_user_response.json()
+
+    return GetMeResponse(**get_user_response_dict)
