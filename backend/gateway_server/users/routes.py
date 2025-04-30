@@ -9,7 +9,8 @@ from connections.upstream_clients import UsersUpstreamClient
 from dependencies import (
     ensure_users_token_is_fresh,
     get_redis_client,
-    get_users_upstream_client
+    get_users_upstream_client,
+    get_user_authorization_token
 )
 from users.annotations import (
     PostRegistrationRequestBody,
@@ -80,3 +81,20 @@ async def login(
     tokens_response_dict = tokens_response.json()
 
     return PostLoginResponse(**tokens_response_dict)
+
+
+@users_router.post(
+    "/logout/",
+    status_code=status.HTTP_204_NO_CONTENT,
+    response_model=None
+)
+async def logout(
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    logout_response = await users_client.post_logout(user_authorization_token)
+
+    await redis_client.delete_token_data(token=user_authorization_token)
+
+    return None
