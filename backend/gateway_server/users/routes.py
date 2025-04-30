@@ -5,12 +5,16 @@ from fastapi import (
 from starlette import status
 
 from connections.redis_clients import RedisClient
-from connections.upstream_clients import UsersUpstreamClient
+from connections.upstream_clients import (
+    UsersUpstreamClient,
+    TransactionsUpstreamClient
+)
 from dependencies import (
     ensure_users_token_is_fresh,
     get_redis_client,
     get_users_upstream_client,
-    get_user_authorization_token
+    get_user_authorization_token,
+    get_transactions_upstream_client
 )
 from users.annotations import (
     PostRegistrationRequestBody,
@@ -194,3 +198,30 @@ async def patch_user(
         )
 
     return PatchMeResponse(**update_user_response_dict)
+
+
+@users_router.delete(
+    "/me/",
+    status_code=status.HTTP_204_NO_CONTENT,
+    response_model=None
+)
+async def delete_user(
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    delete_user_response = await users_client.delete_me(user_authorization_token)
+
+    user_id = await redis_client.retrieve_token_field(
+        token=user_authorization_token,
+        field='id'
+    )
+
+    delete_users_transactions_data_response = await transactions_client.delete_user_transactions(user_id)
+
+    logout_response = await users_client.post_logout(user_authorization_token)
+
+    await redis_client.delete_token_data(token=user_authorization_token)
+
+    return None
