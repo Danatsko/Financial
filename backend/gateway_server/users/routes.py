@@ -27,7 +27,8 @@ from users.models import (
     PostLoginResponse,
     PostRefreshTokenResponse,
     GetMeResponse,
-    PatchMeResponse
+    PatchMeResponse,
+    GetAchievementsResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -225,3 +226,19 @@ async def delete_user(
     await redis_client.delete_token_data(token=user_authorization_token)
 
     return None
+
+
+@users_router.get(
+    "/achievements/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetAchievementsResponse
+)
+async def get_achievements(
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client)
+):
+    get_achievements_response = await users_client.get_achievements(user_authorization_token)
+
+    get_achievements_response_dict = get_achievements_response.json()
+
+    return GetAchievementsResponse(**get_achievements_response_dict)
