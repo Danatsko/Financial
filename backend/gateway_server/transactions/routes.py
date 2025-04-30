@@ -120,3 +120,18 @@ async def patch_transaction(
     update_transaction_response_dict = update_transaction_response.json()
 
     return PatchTransactionResponse(**update_transaction_response_dict)
+
+
+@transactions_router.delete(
+    "/{transaction_id}/",
+    status_code=status.HTTP_204_NO_CONTENT,
+    response_model=None
+)
+async def delete_transaction(
+        transaction_id: TransactionIdPath,
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client)
+):
+    delete_transaction_response = await transactions_client.delete_transaction(transaction_id)
+
+    return None
