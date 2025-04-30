@@ -18,12 +18,15 @@ from dependencies import (
 )
 from transactions.annotations import (
     PostTransactionRequestBody,
-    GetDateRangeRequestParamsQuery
+    GetDateRangeRequestParamsQuery,
+    TransactionIdPath,
+    PatchTransactionRequestBody
 )
 from transactions.models import (
     PostTransactionResponse,
     GetTransactionsDataResponse,
-    GetAnalyseDataResponse
+    GetAnalyseDataResponse,
+    PatchTransactionResponse
 )
 
 transactions_router = APIRouter(dependencies=[Depends(ensure_transactions_token_is_fresh)])
@@ -99,3 +102,21 @@ async def get_analyse_data(
     get_analyse_data_response_dict = get_analyse_data_response.json()
 
     return GetAnalyseDataResponse(**get_analyse_data_response_dict)
+
+
+@transactions_router.patch(
+    "/{transaction_id}/",
+    status_code=status.HTTP_200_OK,
+    response_model=PatchTransactionResponse
+)
+async def patch_transaction(
+        transaction_id: TransactionIdPath,
+        new_transaction_data: PatchTransactionRequestBody,
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client)
+):
+    update_transaction_response = await transactions_client.patch_transaction(transaction_id, new_transaction_data)
+
+    update_transaction_response_dict = update_transaction_response.json()
+
+    return PatchTransactionResponse(**update_transaction_response_dict)
