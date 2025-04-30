@@ -219,7 +219,7 @@ async def delete_user(
         field='id'
     )
 
-    delete_users_transactions_data_response = await transactions_client.delete_user_transactions(user_id)
+    delete_all_user_transactions_data_response = await transactions_client.delete_all_user_transactions(user_id)
 
     logout_response = await users_client.post_logout(user_authorization_token)
 
