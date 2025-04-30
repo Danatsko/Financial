@@ -14,11 +14,13 @@ from dependencies import (
 )
 from users.annotations import (
     PostRegistrationRequestBody,
-    PostLoginRequestBody
+    PostLoginRequestBody,
+    PostRefreshTokenRequestBody
 )
 from users.models import (
     PostRegistrationResponse,
-    PostLoginResponse
+    PostLoginResponse,
+    PostRefreshTokenResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -98,3 +100,33 @@ async def logout(
     await redis_client.delete_token_data(token=user_authorization_token)
 
     return None
+
+
+@users_router.post(
+    "/refresh-token/",
+    status_code=status.HTTP_200_OK,
+    response_model=PostRefreshTokenResponse
+)
+async def refresh_token(
+    refresh_token_data: PostRefreshTokenRequestBody,
+    users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+    redis_client: RedisClient = Depends(get_redis_client)
+):
+    tokens_response = await users_client.post_refresh_token(refresh_token_data)
+
+    access_token = tokens_response.json()['access_token']
+    expires_in = tokens_response.json()['expires_in']
+
+    user_data_response = await users_client.get_me(access_token)
+
+    user = user_data_response.json()['user']
+
+    await redis_client.cache_token_data(
+        token=access_token,
+        data=user,
+        ttl=expires_in
+    )
+
+    tokens_response_dict = tokens_response.json()
+
+    return PostRefreshTokenResponse(**tokens_response_dict)
