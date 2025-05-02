@@ -82,13 +82,13 @@ class GatewayAndClientTokenAuthentication(BaseAuthentication):
         if not hasattr(client_token, 'application') or not client_token.application:
             raise AuthenticationFailed('Client token is not associated with any application.')
 
-        if not hasattr(settings, 'ALLOWED_USER_CLIENT_IDS'):
-            raise ImproperlyConfigured("Setting 'ALLOWED_USER_CLIENT_IDS' is not defined.")
+        if not hasattr(settings, 'USERS_APPLICATION_CLIENT_IDS'):
+            raise ImproperlyConfigured("Setting 'USERS_APPLICATION_CLIENT_IDS' is not defined.")
 
-        if not isinstance(settings.ALLOWED_USER_CLIENT_IDS, (list, tuple)):
-            raise ImproperlyConfigured("Setting 'ALLOWED_USER_CLIENT_IDS' must be a list or tuple.")
+        if not isinstance(settings.USERS_APPLICATION_CLIENT_IDS, (list, tuple)):
+            raise ImproperlyConfigured("Setting 'USERS_APPLICATION_CLIENT_IDS' must be a list or tuple.")
 
-        if client_token.application.client_id not in settings.ALLOWED_USER_CLIENT_IDS:
+        if client_token.application.client_id not in settings.USERS_APPLICATION_CLIENT_IDS:
             raise AuthenticationFailed('Invalid client token: incorrect client application.')
 
         request.client_auth = client_token
