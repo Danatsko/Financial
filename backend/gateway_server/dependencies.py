@@ -71,7 +71,7 @@ async def get_transactions_raw_oauth2_client(manager: UpstreamConnectionManager 
 
 async def get_users_upstream_client(
     oauth2_client: AsyncOAuth2Client = Depends(get_users_raw_oauth2_client),
-    users_base_url: str = str(settings.users_data_server_url)
+    users_base_url: str = str(settings.users_server_url)
 ) -> UsersUpstreamClient:
     client = UsersUpstreamClient(oauth2_client=oauth2_client, base_url=users_base_url)
 
@@ -80,7 +80,7 @@ async def get_users_upstream_client(
 
 async def get_transactions_upstream_client(
     oauth2_client: AsyncOAuth2Client = Depends(get_transactions_raw_oauth2_client),
-    transactions_base_url: str = str(settings.transaction_server_url)
+    transactions_base_url: str = str(settings.transactions_server_url)
 ) -> TransactionsUpstreamClient:
     client = TransactionsUpstreamClient(oauth2_client=oauth2_client, base_url=transactions_base_url)
 
