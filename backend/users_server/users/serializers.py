@@ -6,8 +6,8 @@ User = get_user_model()
 
 
 class UserClientProfileWriteSerializer(serializers.ModelSerializer):
-    balance = serializers.FloatField(required=True)
-    monthly_budget = serializers.FloatField(required=True)
+    balance = serializers.FloatField(write_only=True, required=True)
+    monthly_budget = serializers.FloatField(write_only=True, required=True)
 
     class Meta:
         model = User
