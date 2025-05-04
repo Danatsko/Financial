@@ -86,16 +86,12 @@ class TransactionViewSet(
                 type_categories = TransactionCategory.objects.filter(type=type).values_list('name', flat=True)
                 type_qs = transactions.filter(type=type)
                 type_total = type_qs.aggregate(total=Sum('amount'))['total'] or 0
-                category_sums = {
-                    item['category__name']: item['sum']
-                    for item in type_qs.values('category__name').annotate(sum=Sum('amount'))
-                }
                 type_categories_data = {}
 
                 for category in type_categories:
-                    category_sum = category_sums.get(category, 0) or 0
-                    percentage = round((category_sum / type_total * 100), 1) if type_total > 0 else 0
                     transactions_list = categories_transactions.get(category, [])
+                    category_sum = sum(transaction['amount'] for transaction in transactions_list)
+                    percentage = round((category_sum / type_total * 100), 1) if type_total > 0 else 0
                     type_categories_data[category] = {
                         'percentage': percentage,
                         'transactions': transactions_list,
