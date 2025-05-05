@@ -12,7 +12,8 @@ from transactions.annotations import (
     PostTransactionRequestBody,
     TransactionIdPath,
     PatchTransactionRequestBody,
-    GetDateRangeRequestParamsQuery
+    GetDateRangeRequestParamsQuery,
+    GetMonthlyBudgetRequestParamsQuery
 )
 from users.annotations import (
     PostRegistrationRequestBody,
@@ -264,6 +265,12 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
     ) -> str:
         return f"transactions/{user_id}/get_analyse_data/"
 
+    def get_monthly_recommendations_path(
+            self,
+            user_id: str
+    ) -> str:
+        return f"transactions/{user_id}/get_monthly_recommendations/"
+
     def delete_all_user_transactions_path(
             self,
             user_id: str
@@ -323,6 +330,16 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
         return await self.get(
             self.get_analyse_data_path(user_id),
             params=date_range.model_dump(mode='json')
+        )
+
+    async def get_monthly_recommendations(
+            self,
+            user_id: str,
+            monthly_budget: GetMonthlyBudgetRequestParamsQuery,
+    ) -> httpx.Response:
+        return await self.get(
+            self.get_monthly_recommendations_path(user_id),
+            params=monthly_budget.model_dump(mode='json')
         )
 
     async def delete_all_user_transactions(

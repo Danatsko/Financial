@@ -20,13 +20,15 @@ from transactions.annotations import (
     PostTransactionRequestBody,
     GetDateRangeRequestParamsQuery,
     TransactionIdPath,
-    PatchTransactionRequestBody
+    PatchTransactionRequestBody,
+    GetMonthlyBudgetRequestParamsQuery
 )
 from transactions.models import (
     PostTransactionResponse,
     GetTransactionsDataResponse,
     GetAnalyseDataResponse,
-    PatchTransactionResponse
+    PatchTransactionResponse,
+    GetMonthlyRecommendationsResponse
 )
 
 transactions_router = APIRouter(dependencies=[Depends(ensure_transactions_token_is_fresh)])
@@ -102,6 +104,29 @@ async def get_analyse_data(
     get_analyse_data_response_dict = get_analyse_data_response.json()
 
     return GetAnalyseDataResponse(**get_analyse_data_response_dict)
+
+
+@transactions_router.get(
+    "/get_monthly_recommendations/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetMonthlyRecommendationsResponse
+)
+async def get_monthly_recommendations(
+        monthly_budget: GetMonthlyBudgetRequestParamsQuery,
+        user_authorization_token: str = Depends(get_user_authorization_token),
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    user_id = await redis_client.retrieve_token_field(
+        token=user_authorization_token,
+        field='id'
+    )
+
+    get_monthly_recommendations_response = await transactions_client.get_monthly_recommendations(user_id, monthly_budget)
+
+    get_monthly_recommendations_response_dict = get_monthly_recommendations_response.json()
+
+    return GetMonthlyRecommendationsResponse(**get_monthly_recommendations_response_dict)
 
 
 @transactions_router.patch(

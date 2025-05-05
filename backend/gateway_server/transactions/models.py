@@ -44,6 +44,16 @@ class AnalyseTypeDetailsResponseFields(BaseModel):
     ]
 
 
+class RecommendationInsightResponseFields(BaseModel):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    status: str
+    data: dict[
+        str,
+        str | float | int | list[str]
+    ]
+
+
 class PostTransactionRequest(TransactionBase):
     model_config = ConfigDict(extra='ignore')
 
@@ -82,6 +92,12 @@ class GetDateRangeRequestParams(BaseModel):
         return values
 
 
+class GetMonthlyBudgetRequestParams(BaseModel):
+    model_config = ConfigDict(extra='ignore')
+
+    monthly_budget: float
+
+
 class PostTransactionResponse(TransactionResponseFields):
     model_config = ConfigDict(extra='ignore', frozen=True)
 
@@ -116,3 +132,9 @@ class GetAnalyseDataResponse(BaseModel):
         AnalyseTypeDetailsResponseFields
     ]
     detail: Optional[str] = None
+
+
+class GetMonthlyRecommendationsResponse(BaseModel):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    recommendations: list[RecommendationInsightResponseFields]
