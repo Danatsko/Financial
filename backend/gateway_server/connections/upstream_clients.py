@@ -264,6 +264,12 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
     ) -> str:
         return f"transactions/{user_id}/get_analyse_data/"
 
+    def get_monthly_recommendations_path(
+            self,
+            user_id: str
+    ) -> str:
+        return f"transactions/{user_id}/get_monthly_recommendations/"
+
     def delete_all_user_transactions_path(
             self,
             user_id: str
