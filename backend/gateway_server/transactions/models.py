@@ -92,6 +92,12 @@ class GetDateRangeRequestParams(BaseModel):
         return values
 
 
+class GetMonthlyBudgetRequestParams(BaseModel):
+    model_config = ConfigDict(extra='ignore')
+
+    monthly_budget: float
+
+
 class PostTransactionResponse(TransactionResponseFields):
     model_config = ConfigDict(extra='ignore', frozen=True)
 
