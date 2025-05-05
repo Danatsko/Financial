@@ -2,8 +2,8 @@
 //  FinancialApp.swift
 //  Financial
 //
-//  Created by Анатолій Ганулич on 03.05.2025.
-//
+//  Created by KeeR ReeK on 03.05.2025
+//  Copyright (c) 2025 Financial
 
 import SwiftUI
 
