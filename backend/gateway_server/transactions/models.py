@@ -44,6 +44,16 @@ class AnalyseTypeDetailsResponseFields(BaseModel):
     ]
 
 
+class RecommendationInsightResponseFields(BaseModel):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    status: str
+    data: dict[
+        str,
+        str | float | int | list[str]
+    ]
+
+
 class PostTransactionRequest(TransactionBase):
     model_config = ConfigDict(extra='ignore')
 
