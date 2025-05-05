@@ -96,3 +96,7 @@ class DateRangeSerializer(serializers.Serializer):
                 raise serializers.ValidationError("start_date cannot be greater than end_date")
 
         return data
+
+
+class MonthlyBudgetSerializer(serializers.Serializer):
+    monthly_budget = serializers.FloatField(required=True)
