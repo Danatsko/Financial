@@ -132,3 +132,9 @@ class GetAnalyseDataResponse(BaseModel):
         AnalyseTypeDetailsResponseFields
     ]
     detail: Optional[str] = None
+
+
+class GetMonthlyRecommendationsResponse(BaseModel):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    recommendations: list[RecommendationInsightResponseFields]
