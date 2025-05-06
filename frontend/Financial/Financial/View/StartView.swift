@@ -32,7 +32,7 @@ struct StartView: View {
         .navigationDestination(for: StartRoute.self) { screen in
             switch screen {
             case .login:
-                LoginView()
+                LoginView(navigationService: navigationService)
             case .registration:
                 RegistationView(viewModel: viewModel)
             case .budgetInput:

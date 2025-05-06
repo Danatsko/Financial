@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
+    @ObservedObject var navigationService: NavigationServiceStart
     
     var body: some View {
         VStack {
@@ -55,6 +56,16 @@ struct LoginView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
         .background(Color("BackroundColor"))
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: Button(action: {
+            navigationService.goBack()
+        }, label: {
+            HStack {
+                Image(systemName: "chevron.left")
+                Text("Back")
+            }
+        })
+        )
         .onTapGesture {
             UIApplication.shared.dismissKeyboard()
         }
