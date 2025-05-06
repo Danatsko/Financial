@@ -11,7 +11,6 @@ enum StartRoute: Hashable {
     case login
     case registration
     case budgetInput
-    case mainView
 }
 
 
@@ -32,11 +31,6 @@ final class NavigationServiceStart: ObservableObject {
     
     func goToBudgetInputView() {
         startPath.append(StartRoute.budgetInput)
-    }
-    
-    func goToMainView() {
-        startPath = NavigationPath()
-        startPath.append(StartRoute.mainView)
     }
     
     func goToLoginWithRegistration() {
