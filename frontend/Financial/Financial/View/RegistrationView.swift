@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct RegistationView: View {
-    @StateObject var viewModel: RegistrationViewViewModel
     
-    @State private var email: String?
+    @StateObject var viewModel: RegistrationViewViewModel
+    @ObservedObject var navigationService: NavigationServiceStart
     
     var body: some View {
         
@@ -40,7 +40,7 @@ struct RegistationView: View {
                 
                 
                 FNButton(text: "createAccount", color: .white) {
-                    
+                    navigationService.goToBudgetInputView()
                 }
                 .frame(height: 55)
                 .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
@@ -55,7 +55,7 @@ struct RegistationView: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color("PlaceHolderColor"))
                     Button {
-                        
+                        navigationService.goToLoginWithRegistration()
                     } label: {
                         Text("login")
                             .font(.custom("Montserrat-SemiBold", size: 14))
@@ -65,9 +65,12 @@ struct RegistationView: View {
                 .padding(.top, 30)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .background(Color("BackroundColor"))
         .navigationBarBackButtonHidden()
         .navigationBarItems(leading: Button(action: {
-            
+            navigationService.goBack()
         }, label: {
             HStack {
                 Image(systemName: "chevron.left")
@@ -75,9 +78,6 @@ struct RegistationView: View {
             }
         })
         )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
-        .background(Color("BackroundColor"))
         .onTapGesture {
             UIApplication.shared.dismissKeyboard()
         }

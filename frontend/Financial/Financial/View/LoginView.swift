@@ -38,7 +38,7 @@ struct LoginView: View {
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .foregroundColor(Color("PlaceHolderColor"))
                 Button {
-
+                    navigationService.goToRegistrationWithLogin()
                 } label: {
                     Text("create")
                         .font(.custom("Montserrat-SemiBold", size: 14))
