@@ -6,6 +6,8 @@
 //  Copyright (c) 2025 Financial
 
 import SwiftUI
+import CoreData
+import AVFoundation
 
 // MARK: - Contents of the transaction list
 struct TransactionListViewContent: View {
@@ -88,5 +90,32 @@ struct TransactionListViewContent: View {
         }
         .listStyle(.plain)
         .background(Color("BackroundColor"))
+    }
+}
+
+
+struct TransactionListItemView: View {
+    @ObservedObject var transaction: Transaction
+    @Binding var path: NavigationPath
+
+    
+    var body: some View {
+        HStack {
+            CategoryIconView(transaction: transaction)
+            
+            TransactionInfoView(transaction: transaction)
+            
+            Spacer()
+            
+            TransactionAmountView(transaction: transaction)
+        }
+        .padding()
+        .background(Color("TextFieldBackround"))
+        .cornerRadius(30)
+        .contentShape(Rectangle())
+        .onLongPressGesture {
+            AudioServicesPlaySystemSound(1519)
+            path.append(TransactionRoute.detail(transaction))
+        }
     }
 }
