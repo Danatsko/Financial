@@ -50,7 +50,7 @@ struct TransactionDetailView: View {
                 
             }
             .padding()
-            .navigationTitle(viewModel.transaction.type ?? "Немає значення")
+            .navigationTitle(viewModel.transaction.type ?? "No value")
         }
         .toolbar(.hidden, for: .tabBar)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
