@@ -150,3 +150,27 @@ struct TransactionInfoView: View {
         }
     }
 }
+
+// MARK: - Component of the category icon
+struct CategoryIconView: View {
+    @ObservedObject var transaction: Transaction
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .overlay(
+                    Image("backroundIconCategory")
+                        .resizable()
+                        .scaledToFit()
+                        .allowsHitTesting(false)
+                )
+                .frame(width: 50, height: 50)
+            
+            Image(systemName: imageName(for: transaction.category ?? ""))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
+        }
+        .contentShape(Rectangle())
+    }
+}
