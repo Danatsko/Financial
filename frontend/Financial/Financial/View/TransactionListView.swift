@@ -59,8 +59,19 @@ struct TransactionListView: View {
             .navigationDestination(for: TransactionRoute.self) { route in
                 switch route {
                 case .detail(let transaction):
-                    
+                    TransactionDetailView(
+                        viewModel: TransactionDetailViewModel(
+                            transaction: transaction,
+                            path: $path
+                        )
+                    )
                 case .edit(let transaction):
+                    TransactionEditView(
+                        viewModel: TransactionEditViewModel(
+                            transaction: transaction,
+                            path: $path
+                        )
+                    )
                 }
             }
         }

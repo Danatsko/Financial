@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionEditView: View {
     
-    @StateObject var viewModel: TransactionEditViewModel
+    @ObservedObject var viewModel: TransactionEditViewModel
     @EnvironmentObject var appState: AppState
     
     var body: some View {
