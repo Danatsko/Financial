@@ -185,3 +185,24 @@ func formattedTransactionAmount(_ amount: Double) -> String {
         return String(format: "%.2f", amount)
     }
 }
+
+// MARK: - A helper function for getting the category icon
+func imageName(for category: String) -> String {
+    switch category {
+    case "products": return "cart"
+    case "cafes_restaurants": return "fork.knife"
+    case "utilities_home": return "bolt"
+    case "entertainment": return "gamecontroller"
+    case "devices": return "laptopcomputer"
+    case "transport": return "car"
+    case "animals": return "pawprint"
+    case "beauty_health": return "heart.text.square"
+    case "clothing_accessories": return "tshirt"
+    case "charity": return "gift"
+    case "other_sources_of_costs": return "questionmark"
+    case "business": return "building.2"
+    case "payments": return "creditcard"
+    case "other_sources_of_income": return "banknote"
+    default: return "questionmark"
+    }
+}
