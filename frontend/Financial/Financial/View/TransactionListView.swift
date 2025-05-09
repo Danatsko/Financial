@@ -26,34 +26,43 @@ struct TransactionListView: View {
     ) private var user: FetchedResults<User>
     
     var body: some View {
-        VStack(spacing: 16) {
-            
-            HStack {
-                Text("yourBalance")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(.white)
-                Spacer()
-            }
-            
-            if let currentUser = user.first {
-                BalanceCardView(user: currentUser)
-            }
-            
-            HStack {
-                Text("transactions")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(.white)
+        NavigationStack(path: $path) {
+            VStack(spacing: 16) {
                 
-                Spacer()
+                HStack {
+                    Text("yourBalance")
+                        .font(.custom("Montserrat-Bold", size: 24))
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                
+                if let currentUser = user.first {
+                    BalanceCardView(user: currentUser)
+                }
+                
+                HStack {
+                    Text("transactions")
+                        .font(.custom("Montserrat-Bold", size: 24))
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                }
+                
+                TransactionListViewContent(path: $path)
             }
-            
-            TransactionListViewContent(path: $path)
-        }
-        .padding()
-        .background(Color("BackroundColor"))
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onTapGesture {
-            UIApplication.shared.dismissKeyboard()
+            .padding()
+            .background(Color("BackroundColor"))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onTapGesture {
+                UIApplication.shared.dismissKeyboard()
+            }
+            .navigationDestination(for: TransactionRoute.self) { route in
+                switch route {
+                case .detail(let transaction):
+                    
+                case .edit(let transaction):
+                }
+            }
         }
     }
 }
