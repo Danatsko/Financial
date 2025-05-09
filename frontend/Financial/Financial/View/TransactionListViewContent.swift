@@ -58,7 +58,7 @@ struct TransactionListViewContent: View {
                     print("Видалено упішно")
                 } catch let error as NetworkError {
                     if case .refreshFailed = error {
-                        coreDataManager.shared.deleteUser()
+                        coreDataManager.deleteUser()
                         appState.isLoggedIn = false
                     }
                 } catch {
