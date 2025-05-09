@@ -1,0 +1,92 @@
+//
+//  TransactionListViewContent.swift
+//  Financial
+//
+//  Created by KeeR ReeK on 09.05.2025.
+//  Copyright (c) 2025 Financial
+
+import SwiftUI
+
+// MARK: - Contents of the transaction list
+struct TransactionListViewContent: View {
+    var coreDataManager = CoreDataManager.shared
+    @Binding var path: NavigationPath
+    @EnvironmentObject var appState: AppState
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)],
+        animation: .default)
+    private var transactions: FetchedResults<Transaction>
+    
+    private var emptyListView: some View {
+        Text(NSLocalizedString("transactionsEmpty", comment: "Message when transactions list is empty"))
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("BackroundColor"))
+            .listRowInsets(EdgeInsets())
+            .listRowSeparator(.hidden)
+    }
+    
+    private var transactionListView: some View {
+        let sortedGroups = groupedTransactions.sorted { $0.key > $1.key }
+
+        return ForEach(sortedGroups, id: \.key) { month, transactions in
+            Section(header: Text(month).foregroundColor(.white).font(.headline)) {
+                ForEach(transactions, id: \.self) { transaction in
+                    TransactionListItemView(transaction: transaction, path: $path)
+                        .frame(maxWidth: .infinity)
+                        .padding(.bottom, 10)
+                        .swipeActions(edge: .trailing) {
+                            deleteSwipeButton(for: transaction)
+                        }
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+            }
+        }
+    }
+    
+    private func deleteSwipeButton(for transaction: Transaction) -> some View {
+        Button(role: .destructive) {
+            Task {
+                do {
+                    try await ApiService.shared.deleteTransaction(id: Int(transaction.serverId))
+                    coreDataManager.deleteTransaction(transaction: transaction)
+                    print("Видалено упішно")
+                } catch let error as NetworkError {
+                    if case .refreshFailed = error {
+                        coreDataManager.shared.deleteUser()
+                        appState.isLoggedIn = false
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        } label: {
+            Label(NSLocalizedString("delete", comment: "Delete button"), systemImage: "trash")
+        }
+        .tint(.red)
+    }
+    
+    private var groupedTransactions: [String: [Transaction]] {
+        Dictionary(grouping: transactions) { transaction in
+            let date = transaction.date ?? Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "LLLL yyyy"
+            return formatter.string(from: date)
+        }
+    }
+    
+    var body: some View {
+        List {
+            if transactions.isEmpty {
+                emptyListView
+            } else {
+                transactionListView
+            }
+        }
+        .listStyle(.plain)
+        .background(Color("BackroundColor"))
+    }
+}
