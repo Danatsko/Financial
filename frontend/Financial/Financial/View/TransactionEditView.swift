@@ -193,9 +193,15 @@ struct TransactionEditView: View {
                     CoreDataManager.shared.deleteUser()
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                viewModel.path.removeLast(viewModel.path.count)
-                viewModel.resetForm()
+            
+            Task {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await MainActor.run {
+                    if !viewModel.path.isEmpty {
+                        viewModel.path.removeLast(viewModel.path.count)
+                    }
+                    viewModel.resetForm()
+                }
             }
         }
         .disabled(!viewModel.isFormValid)
