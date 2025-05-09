@@ -57,3 +57,61 @@ struct TransactionListView: View {
         }
     }
 }
+
+
+struct BalanceCardView: View {
+    
+    @ObservedObject var user: User
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Image("cardBalance")
+                .resizable()
+                .scaledToFill()
+                .clipped()
+            VStack(alignment: .leading) {
+                Spacer()
+                if abs(user.balance) > 999999999999 {
+                    ScrollView(.horizontal) {
+                        Text(balanceFormatted)
+                            .font(.custom("Montserrat-SemiBold", size: 36))
+                            .foregroundColor(.white)
+                            .padding(.leading, 30)
+                            .padding(.top, 40)
+                            .clipped()
+                    }
+                    .clipped()
+                    .mask(
+                        RoundedRectangle(cornerRadius: 1)
+                            .frame(width: UIScreen.main.bounds.width - 32 - 60)
+                    )
+                } else {
+                    Text(balanceFormatted)
+                        .font(.custom("Montserrat-SemiBold", size: 36))
+                        .foregroundColor(.white)
+                        .padding(.leading, 30)
+                        .padding(.top, 40)
+                }
+                Spacer()
+                Text("02/24")
+                    .font(.custom("Montserrat-SemiBold", size: 11))
+                    .foregroundColor(.white)
+                    .padding(.leading, 30)
+                    .padding(.bottom, 29)
+            }
+        }
+        .frame(maxWidth: UIScreen.main.bounds.width - 32)
+        .frame(height: 200)
+        .offset(y: -15)
+    }
+    
+    var balanceFormatted: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        formatter.decimalSeparator = "."
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: user.balance)) ?? "0.00"
+    }
+}
