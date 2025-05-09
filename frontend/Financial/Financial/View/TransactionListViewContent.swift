@@ -94,6 +94,7 @@ struct TransactionListViewContent: View {
 }
 
 
+// MARK: - The main component of the transaction list item
 struct TransactionListItemView: View {
     @ObservedObject var transaction: Transaction
     @Binding var path: NavigationPath
@@ -117,5 +118,17 @@ struct TransactionListItemView: View {
             AudioServicesPlaySystemSound(1519)
             path.append(TransactionRoute.detail(transaction))
         }
+    }
+}
+
+// MARK: - Component of the transaction amount
+struct TransactionAmountView: View {
+    @ObservedObject var transaction: Transaction
+    
+    var body: some View {
+        let type = transaction.type ?? "expenses"
+        
+        Text("\(type == "incomes" ? "+" : "-") ₴\(formattedTransactionAmount(transaction.amount))")
+            .foregroundColor(.white)
     }
 }
