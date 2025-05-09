@@ -174,3 +174,14 @@ struct CategoryIconView: View {
         .contentShape(Rectangle())
     }
 }
+
+// MARK: - A helper function for getting the category icon
+func formattedTransactionAmount(_ amount: Double) -> String {
+    if amount >= 1000000 {
+        return "\(Int(amount / 1000000)) млн."
+    } else if amount >= 1000 {
+        return "\(Int(amount / 1000)) тис."
+    } else {
+        return String(format: "%.2f", amount)
+    }
+}
