@@ -132,3 +132,21 @@ struct TransactionAmountView: View {
             .foregroundColor(.white)
     }
 }
+
+// MARK: - Component of information about the transaction
+struct TransactionInfoView: View {
+    @ObservedObject var transaction: Transaction
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(transaction.title ?? "Без назви")
+                .lineLimit(1)
+                .foregroundColor(.white)
+                .font(.custom("Montserrat-SemiBold", size: 22))
+            
+            Text(transaction.descriptionText ?? "Без опису")
+                .lineLimit(1)
+                .font(.custom("Montserrat", size: 14))
+        }
+    }
+}
