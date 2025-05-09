@@ -3,13 +3,13 @@
 //  Financial
 //
 //  Created by KeeR ReeK on 09.05.2025.
-//
+//  Copyright (c) 2025 Financial
 
 import SwiftUI
 
 struct TransactionDetailView: View {
     
-    @StateObject var viewModel: TransactionDetailViewViewModel
+    @StateObject var viewModel: TransactionDetailViewModel
     
     
     
