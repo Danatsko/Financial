@@ -3,7 +3,7 @@
 //  Financial
 //
 //  Created by KeeR ReeK on 09.05.2025.
-//
+//  Copyright (c) 2025 Financial
 
 import Foundation
 import Security
