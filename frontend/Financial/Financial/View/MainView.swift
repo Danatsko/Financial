@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         TabView {
@@ -29,6 +30,7 @@ struct MainView: View {
                     Image(systemName: "medal")
                 }
             ProfileView()
+                .environmentObject(appState)
                 .tabItem {
                     Image(systemName: "person")
                 }
