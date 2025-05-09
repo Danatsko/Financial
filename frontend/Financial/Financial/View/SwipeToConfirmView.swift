@@ -18,7 +18,7 @@ struct SwipeToConfirmView: View {
     
     var body: some View {
         ZStack {
-            // Смуга для свайпу
+            
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color("TextFieldBackround"))
                 .frame(height: 60)
