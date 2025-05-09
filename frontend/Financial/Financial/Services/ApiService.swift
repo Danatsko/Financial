@@ -3,7 +3,7 @@
 //  Financial
 //
 //  Created by KeeR ReeK on 09.05.2025.
-//
+//  Copyright (c) 2025 Financial
 
 import Foundation
 
@@ -190,7 +190,7 @@ final class ApiService {
             if let date = stringToDate(decodeUser.user.dateJoined) {
                 print("decodeUserDateJoined: \(decodeUser.user.dateJoined)")
                 print("Date: \(date)")
-                await CoreDataService.shared.createUser(
+                await CoreDataManager.shared.createUser(
                     email: decodeUser.user.email,
                     creationData: date,
                     monthlyBudget: Int(decodeUser.user.email) ?? 0,
@@ -244,7 +244,7 @@ final class ApiService {
     
     func getTransactionsData() async throws {
         
-        guard let startDate = await CoreDataService.shared.getCreatinDate() else {
+        guard let startDate = await CoreDataManager.shared.getCreatinDate() else {
             print("❌ Unable to get the start date for creating transactions")
             return
         }
@@ -277,7 +277,7 @@ final class ApiService {
                     continue
                 }
                 
-                await CoreDataService.shared.createTransaction(
+                await CoreDataManager.shared.createTransaction(
                     type: response.type,
                     amount: response.amount,
                     title: response.title,
@@ -337,7 +337,7 @@ final class ApiService {
             if let date = stringToDate(decodeTransaction.creationDate) {
                 
                 print("Date: \(date)")
-                await CoreDataService.shared.createTransaction(
+                await CoreDataManager.shared.createTransaction(
                     type: decodeTransaction.type,
                     amount: decodeTransaction.amount,
                     title: decodeTransaction.title,
@@ -415,7 +415,7 @@ final class ApiService {
             let decodeTransaction = try decoder.decode(TransactionResponseGetTransaction.self, from: data)
             
             if let date = stringToDate(decodeTransaction.creationDate) {
-                await CoreDataService.shared.updateTransaction(
+                await CoreDataManager.shared.updateTransaction(
                     serverId: server_id,
                     newType: decodeTransaction.type,
                     newAmount: decodeTransaction.amount,
@@ -479,11 +479,11 @@ final class ApiService {
             let decodeAchievements = try decoder.decode(AchievementsResponseWrapper.self, from: data)
             
             for achievement in decodeAchievements.achievements.costs {
-                await CoreDataService.shared.createGoal(name: achievement.key, count: Int32(achievement.value))
+                await CoreDataManager.shared.createGoal(name: achievement.key, count: Int32(achievement.value))
             }
             
             for achievement in decodeAchievements.achievements.incomes {
-                await CoreDataService.shared.createGoal(name: achievement.key, count: Int32(achievement.value))
+                await CoreDataManager.shared.createGoal(name: achievement.key, count: Int32(achievement.value))
             }
                 
             } catch {

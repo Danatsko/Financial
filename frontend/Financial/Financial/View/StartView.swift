@@ -34,7 +34,7 @@ struct StartView: View {
             case .login:
                 LoginView(navigationService: navigationService)
             case .registration:
-                RegistationView(viewModel: viewModel)
+                RegistationView(viewModel: viewModel, navigationService: navigationService)
             case .budgetInput:
                 BudgetInputView(viewModel: viewModel)
             }
