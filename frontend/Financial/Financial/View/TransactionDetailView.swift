@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionDetailView: View {
     
-    @StateObject var viewModel: TransactionDetailViewModel
+    @ObservedObject var viewModel: TransactionDetailViewModel
     
     
     
