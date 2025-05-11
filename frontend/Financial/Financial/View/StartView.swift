@@ -13,8 +13,8 @@ struct StartView: View {
     @StateObject var viewModel = RegistrationViewViewModel.shared
     
     var body: some View {
-        VStack {
-            NavigationStack(path: $navigationService.startPath) {
+        NavigationStack(path: $navigationService.startPath) {
+            VStack {
                 LogoView()
                 
                 FNButton(text: "login", color: Color.white) {
