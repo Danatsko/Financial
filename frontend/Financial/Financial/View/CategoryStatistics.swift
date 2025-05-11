@@ -15,7 +15,7 @@ struct CategoryStatistics: View {
         ScrollView (.horizontal) {
             HStack {
                 if viewModel.displayableCategoriesIncomes.isEmpty {
-                    Text("Дані про категорії відсутні")
+                    Text("Data for categories not available")
                 } else {
                     if viewModel.incomeButtonState {
                         ForEach(viewModel.displayableCategoriesIncomes) { category in

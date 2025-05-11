@@ -58,7 +58,7 @@ struct CategoryButtonStatisticsView: View {
                     .frame(width: 30, height: 60)
                 
                 VStack(alignment: .leading) {
-                    Text(title.localized)
+                    Text(title)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 15))
                     
