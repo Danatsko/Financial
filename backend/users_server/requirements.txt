@@ -6,3 +6,4 @@ djangorestframework~=3.16.0
 django-health-check~=3.18.3
 drf-spectacular[SwaggerUI,Redoc]~=0.28.0
 django-allauth~=65.8.0
+PyJWT~=2.10.1
