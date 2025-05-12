@@ -1,12 +1,20 @@
+import uuid
+
 from allauth.account.adapter import get_adapter
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
+from django.core.cache import cache
+from django.shortcuts import redirect
 from oauth2_provider.contrib.rest_framework import TokenMatchesOASRequirements
 from rest_framework import (
     status,
     mixins
 )
-from rest_framework.permissions import AllowAny
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated
+)
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.views import APIView
@@ -95,3 +103,33 @@ class SocialLoginUrlAPIView(APIView):
         absolute_login_url = request.build_absolute_uri(login_url_path)
 
         return JsonResponse({'login_url': absolute_login_url})
+
+
+class GenerateAppCodeAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(
+            self,
+            request,
+            *args,
+            **kwargs
+    ):
+        if not request.user.is_authenticated:
+            return Response(
+                {'error': 'User not authenticated by social provider via allauth.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        app_code = str(uuid.uuid4())
+
+        cache.set(f'django:auth:app_code:{app_code}', request.user.id, timeout=300)
+
+        provider = request.session.get('socialaccount_sociallogin', {}).get('account', {}).get('provider')
+
+        if not provider and request.user.socialaccount_set.exists():
+            provider = request.user.socialaccount_set.first().provider
+
+        client_callback_url_with_code = f'myapp://social-login-callback?app_code={app_code}&provider={provider}'
+
+        return redirect(client_callback_url_with_code)
