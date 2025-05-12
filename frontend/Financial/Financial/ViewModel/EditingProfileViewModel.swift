@@ -9,6 +9,11 @@ import Foundation
 
 class EditingProfileViewViewModel: ObservableObject {
     
+    let userDefaultsService = UserDefaultsService.shared
+    
     let availableImages = ["firstBoy", "secondBoy", "thirdBoy", "firstGirl", "secondGirl", "thirdGirl"]
     
+    func saveImageName(_ name: String) {
+        userDefaultsService.saveSelectedImage(name)
+    }
 }

@@ -11,12 +11,16 @@ import Foundation
 class ProfileViewViewModel: ObservableObject {
     
     private let coreDataService = CoreDataManager.shared
+    let userDefaultsService = UserDefaultsService.shared
     @Published var showAlert = false
     @Published var showEditProfile = false
     @Published var showSettings = false
     @Published var showHelp = false
     @Published var imageName = ""
     
+    init() {
+        self.imageName = userDefaultsService.getSelectedImage()
+    }
     
     func logoutApi() async -> Bool {
         
