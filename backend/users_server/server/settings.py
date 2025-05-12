@@ -14,6 +14,8 @@ from pathlib import Path
 import environ
 import os
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -220,6 +222,17 @@ SOCIALACCOUNT_PROVIDERS = {
         'EXCHANGE_TOKEN': True,
     }
 }
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = reverse_lazy('generate_app_code')
+LOGOUT_REDIRECT_URL = '/'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Financial: users server',
