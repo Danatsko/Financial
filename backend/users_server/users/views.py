@@ -1,11 +1,15 @@
+from allauth.account.adapter import get_adapter
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from oauth2_provider.contrib.rest_framework import TokenMatchesOASRequirements
 from rest_framework import (
     status,
     mixins
 )
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
 from server.authentication import GatewayAndClientTokenAuthentication
@@ -72,3 +76,22 @@ class UserClientProfileViewSet(
             request.user.delete()
 
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class SocialLoginUrlAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(
+            self,
+            request,
+            provider,
+            *args,
+            **kwargs
+    ):
+        django_http_request = request._request
+        adapter = get_adapter(django_http_request)
+        provider = adapter.get_provider(django_http_request, provider)
+        login_url_path = provider.get_login_url(django_http_request)
+        absolute_login_url = request.build_absolute_uri(login_url_path)
+
+        return JsonResponse({'login_url': absolute_login_url})
