@@ -188,6 +188,38 @@ REST_FRAMEWORK = {
 GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
 USERS_APPLICATION_CLIENT_IDS = env.list('USERS_APPLICATION_CLIENT_IDS')
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'VERIFIED_EMAIL': True,
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'AUTH_PARAMS': {
+            'auth_type': 'reauthenticate'
+        },
+        'INIT_PARAMS': {
+            'cookie': True
+        },
+        'SCOPE': [
+            'email',
+            'public_profile',
+        ],
+        'FIELDS': [
+            'email',
+        ],
+        'VERIFIED_EMAIL': False,
+        'EXCHANGE_TOKEN': True,
+    }
+}
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Financial: users server',
     'DESCRIPTION': 'Users server',
