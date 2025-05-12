@@ -20,7 +20,7 @@ from users.annotations import (
     PostRegistrationRequestBody,
     PostLoginRequestBody,
     PostRefreshTokenRequestBody,
-    PatchMeRequestBody
+    PatchMeRequestBody, ProviderPath
 )
 from users.models import (
     PostRegistrationResponse,
@@ -28,7 +28,7 @@ from users.models import (
     PostRefreshTokenResponse,
     GetMeResponse,
     PatchMeResponse,
-    GetAchievementsResponse
+    GetAchievementsResponse, GetSocialLoginUrlResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -242,3 +242,19 @@ async def get_achievements(
     get_achievements_response_dict = get_achievements_response.json()
 
     return GetAchievementsResponse(**get_achievements_response_dict)
+
+
+@users_router.get(
+    "/social/{provider}/login-url/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetSocialLoginUrlResponse
+)
+async def get_social_login_url(
+        provider: str = ProviderPath,
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client)
+):
+    get_social_login_url_response = await users_client.get_social_login_url(provider=provider)
+
+    get_social_login_url_response_dict = get_social_login_url_response.json()
+
+    return GetSocialLoginUrlResponse(**get_social_login_url_response_dict)
