@@ -22,7 +22,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="monthlyBudget" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="goal" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Goal" inverseName="user" inverseEntity="Goal"/>
-        <relationship name="transaction" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Transaction" inverseName="user" inverseEntity="Transaction"/>
+        <relationship name="goal" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Goal" inverseName="user" inverseEntity="Goal"/>
+        <relationship name="transaction" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Transaction" inverseName="user" inverseEntity="Transaction"/>
     </entity>
 </model>
