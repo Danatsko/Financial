@@ -14,6 +14,8 @@ from pathlib import Path
 import environ
 import os
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -47,6 +50,11 @@ INSTALLED_APPS = [
     'health_check',
     'health_check.db',
     'drf_spectacular',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 
     'users.apps.UsersConfig',
     'achievements.apps.AchievementsConfig',
@@ -58,9 +66,17 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 ROOT_URLCONF = 'server.urls'
 
@@ -142,6 +158,7 @@ AUTH_USER_MODEL = 'users.Users'
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
+    "ROTATE_REFRESH_TOKEN": True,
     "SCOPES": {
         "users:own:profile:create": "Allows creating the user's own profile.",
         "users:own:profile:read": "Allows reading the user's own profile.",
@@ -173,6 +190,51 @@ REST_FRAMEWORK = {
 
 GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
 USERS_APPLICATION_CLIENT_IDS = env.list('USERS_APPLICATION_CLIENT_IDS')
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'VERIFIED_EMAIL': True,
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'AUTH_PARAMS': {
+            'auth_type': 'reauthenticate'
+        },
+        'INIT_PARAMS': {
+            'cookie': True
+        },
+        'SCOPE': [
+            'email',
+            'public_profile',
+        ],
+        'FIELDS': [
+            'email',
+        ],
+        'VERIFIED_EMAIL': False,
+        'EXCHANGE_TOKEN': True,
+    }
+}
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = reverse_lazy('generate_app_code')
+LOGOUT_REDIRECT_URL = '/'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
+
+SOCIALACCOUNT_APPLICATION_CLIENT_ID = env.str('SOCIALACCOUNT_APPLICATION_CLIENT_ID')
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Financial: users server',

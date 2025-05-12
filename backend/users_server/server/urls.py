@@ -27,7 +27,12 @@ from drf_spectacular.views import (
 from rest_framework.routers import DefaultRouter
 
 from achievements.views import AchievementViewSet
-from users.views import UserClientProfileViewSet
+from users.views import (
+    UserClientProfileViewSet,
+    SocialLoginUrlAPIView,
+    GenerateAppCodeAPIView,
+    SocialTokenExchangeAPIView
+)
 
 router = DefaultRouter()
 router.register(r'users', UserClientProfileViewSet, basename='users')
@@ -40,5 +45,9 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api/accounts/', include('allauth.urls')),
+    path('api/social/<str:provider>/login-url/', SocialLoginUrlAPIView.as_view(), name='social_login_url'),
+    path('api/social/generate-app-code/', GenerateAppCodeAPIView.as_view(), name='generate_app_code'),
+    path('api/social/exchange-token/', SocialTokenExchangeAPIView.as_view(), name='social_exchange_token'),
     path('api/', include(router.urls)),
 ]
