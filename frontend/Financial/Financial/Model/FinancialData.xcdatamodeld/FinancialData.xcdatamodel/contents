@@ -3,7 +3,7 @@
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="goal" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="User" inverseName="goal" inverseEntity="User"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="User" inverseName="goal" inverseEntity="User"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -22,7 +22,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="monthlyBudget" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="goal" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Goal" inverseName="goal" inverseEntity="Goal"/>
+        <relationship name="goal" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Goal" inverseName="user" inverseEntity="Goal"/>
         <relationship name="transaction" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Transaction" inverseName="user" inverseEntity="Transaction"/>
     </entity>
 </model>
