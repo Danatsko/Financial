@@ -156,6 +156,7 @@ AUTH_USER_MODEL = 'users.Users'
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
+    "ROTATE_REFRESH_TOKEN": True,
     "SCOPES": {
         "users:own:profile:create": "Allows creating the user's own profile.",
         "users:own:profile:read": "Allows reading the user's own profile.",
