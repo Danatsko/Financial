@@ -11,6 +11,8 @@ struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
     @ObservedObject var navigationService: NavigationServiceStart
     
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
         VStack {
             LogoView()
@@ -25,7 +27,10 @@ struct LoginView: View {
             }
             
             FNButton(text: "login", color: Color("ButtonLoginColor")) {
-                
+                if await viewModel.login() {
+                    appState.isLoggedIn = true
+                    navigationService.clearAll()
+                }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20))
             .disabled(viewModel.isAvaibleLogin())

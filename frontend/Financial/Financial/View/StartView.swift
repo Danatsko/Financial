@@ -11,6 +11,7 @@ struct StartView: View {
     
     @StateObject var navigationService = NavigationServiceStart.shared
     @StateObject var viewModel = RegistrationViewViewModel.shared
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         NavigationStack(path: $navigationService.startPath) {
@@ -33,10 +34,12 @@ struct StartView: View {
                 switch screen {
                 case .login:
                     LoginView(navigationService: navigationService)
+                        .environmentObject(appState)
                 case .registration:
                     RegistationView(viewModel: viewModel, navigationService: navigationService)
                 case .budgetInput:
                     BudgetInputView(viewModel: viewModel)
+                        .environmentObject(appState)
                 }
             }
         }

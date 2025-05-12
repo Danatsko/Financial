@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct BudgetInputView: View {
+    
     @StateObject var viewModel: RegistrationViewViewModel
+    @ObservedObject var navigationService = NavigationServiceStart.shared
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack {
@@ -49,6 +52,10 @@ struct BudgetInputView: View {
             
             FNButton(text: "enterBudget", color: Color("ButtonLoginColor")) {
                 
+                if await viewModel.finishRegistration() {
+                    appState.isLoggedIn = true
+                    navigationService.clearAll()
+                }
             }
             .disabled(viewModel.isAvaibleBudget())
             .opacity(viewModel.isAvaibleBudget() ? 0.5 : 1.0)

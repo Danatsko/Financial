@@ -46,4 +46,34 @@ class LoginViewViewModel: ObservableObject {
     func isAvaibleLogin() -> Bool {
         return !isValidEmail || !isValidPassword || password.isEmpty || email.isEmpty
     }
+    
+    func login() async -> Bool {
+        
+        do {
+            try await ApiService.shared.login(email: email, password: password)
+            if try await ApiService.shared.getUserInfo() {
+                try await ApiService.shared.getTransactionsData()
+                try await ApiService.shared.getAchievements()
+            }
+        } catch let error as NetworkError {
+            
+            if case .clientError(let statusCode, let message) = error {
+                self.isValidEmail = false
+                self.isValidPassword = false
+                self.isLoginError = true
+                return false
+            }
+            if case .other = error {
+                self.isVisibleErrorResponse = true
+                return false
+            }
+        } catch {
+            print("Інша помилка: \(error)")
+            DispatchQueue.main.async {
+                self.isVisibleErrorResponse = true
+            }
+            return false
+        }
+        return true
+    }
 }

@@ -56,4 +56,29 @@ class RegistrationViewViewModel: ObservableObject {
     func isAvaibleBudget() -> Bool {
         monthlyBudget.isEmpty
     }
+    
+    func finishRegistration() async -> Bool {
+        let cleanedBudgetString = monthlyBudget.replacingOccurrences(of: ",", with: "")
+        let monthlyBudgetClean = Int(cleanedBudgetString) ?? 0
+        do {
+            try await ApiService.shared.register(username: "Nick", email: email, password: password, balance: String(balance), monthly_budget: String(monthlyBudgetClean))
+            if try await ApiService.shared.getUserInfo() {
+                try await ApiService.shared.getTransactionsData()
+            }
+        } catch let error as NetworkError {
+            if case .clientError(let statusCode, let message) = error {
+                self.isValidEmail = false
+                self.isValidPassword = false
+                return false
+            }
+            if case .other = error {
+                self.isVisibleErrorResponse = true
+                return false
+            }
+        } catch {
+            self.isVisibleErrorResponse = true
+            return false
+        }
+        return true
+    }
 }
