@@ -2,6 +2,7 @@ from fastapi import (
     APIRouter,
     Depends
 )
+from httpx import HTTPStatusError
 from starlette import status
 
 from connections.redis_clients import RedisClient
@@ -16,11 +17,12 @@ from dependencies import (
     get_user_authorization_token,
     get_transactions_upstream_client
 )
+from exceptions.exceptions import GatewayUpstreamHTTPError
 from users.annotations import (
     PostRegistrationRequestBody,
     PostLoginRequestBody,
     PostRefreshTokenRequestBody,
-    PatchMeRequestBody
+    PatchMeRequestBody, ProviderPath
 )
 from users.models import (
     PostRegistrationResponse,
@@ -28,7 +30,7 @@ from users.models import (
     PostRefreshTokenResponse,
     GetMeResponse,
     PatchMeResponse,
-    GetAchievementsResponse
+    GetAchievementsResponse, GetSocialLoginUrlResponse, PostSocialExchangeTokenRequest, PostSocialExchangeTokenResponse
 )
 
 users_router = APIRouter(dependencies=[Depends(ensure_users_token_is_fresh)])
@@ -242,3 +244,51 @@ async def get_achievements(
     get_achievements_response_dict = get_achievements_response.json()
 
     return GetAchievementsResponse(**get_achievements_response_dict)
+
+
+@users_router.get(
+    "/social/{provider}/login-url/",
+    status_code=status.HTTP_200_OK,
+    response_model=GetSocialLoginUrlResponse
+)
+async def get_social_login_url(
+        provider: str = ProviderPath,
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client)
+):
+    get_social_login_url_response = await users_client.get_social_login_url(provider=provider)
+
+    get_social_login_url_response_dict = get_social_login_url_response.json()
+
+    return GetSocialLoginUrlResponse(**get_social_login_url_response_dict)
+
+
+@users_router.post(
+    "/social/exchange-token/",
+    status_code=status.HTTP_200_OK,
+    response_model=PostSocialExchangeTokenResponse
+)
+async def post_social_exchange_token(
+        social_data: PostSocialExchangeTokenRequest,
+        users_client: UsersUpstreamClient = Depends(get_users_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
+):
+    post_social_exchange_token_response = await users_client.post_social_exchange_token(
+        app_code=social_data.app_code,
+        provider=social_data.provider
+    )
+    post_social_exchange_token_response_dict = post_social_exchange_token_response.json()
+
+    access_token = post_social_exchange_token_response_dict.get('access_token')
+    expires_in = post_social_exchange_token_response_dict.get('expires_in')
+
+    user_data_response = await users_client.get_me(access_token)
+
+    user = user_data_response.json()['user']
+
+    await redis_client.cache_token_data(
+        token=access_token,
+        data=user,
+        ttl=expires_in
+    )
+
+    return PostSocialExchangeTokenResponse(**post_social_exchange_token_response_dict)

@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import (
     BaseModel,
     EmailStr,
-    ConfigDict
+    ConfigDict, HttpUrl
 )
 from datetime import datetime
 
@@ -54,6 +54,13 @@ class PostRefreshTokenRequest(BaseModel):
     refresh_token: str
 
 
+class PostSocialExchangeTokenRequest(BaseModel):
+    model_config = ConfigDict(extra='ignore')
+
+    app_code: str
+    provider: str
+
+
 class PatchMeRequest(BaseModel):
     model_config = ConfigDict(extra='ignore')
 
@@ -71,6 +78,12 @@ class PostRegistrationResponse(TokenResponseFields):
 
 
 class PostLoginResponse(TokenResponseFields):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    pass
+
+
+class PostSocialExchangeTokenResponse(TokenResponseFields):
     model_config = ConfigDict(extra='ignore', frozen=True)
 
     pass
@@ -104,3 +117,9 @@ class GetAchievementsResponse(BaseModel):
             int
         ]
     ]
+
+
+class GetSocialLoginUrlResponse(BaseModel):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    login_url: HttpUrl
