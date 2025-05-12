@@ -83,6 +83,12 @@ class PostLoginResponse(TokenResponseFields):
     pass
 
 
+class PostSocialExchangeTokenResponse(TokenResponseFields):
+    model_config = ConfigDict(extra='ignore', frozen=True)
+
+    pass
+
+
 class PostRefreshTokenResponse(TokenResponseFields):
     model_config = ConfigDict(extra='ignore', frozen=True)
 
