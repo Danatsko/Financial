@@ -119,6 +119,10 @@ class UsersUpstreamClient(BaseUpstreamClient):
     def post_refresh_token_path(self) -> str: return "o/token/"
 
     @property
+    def post_social_exchange_token_path(self) -> str:
+        return "social/exchange-token/"
+
+    @property
     def get_me_path(self) -> str: return "users/me/"
 
     @property
@@ -129,6 +133,12 @@ class UsersUpstreamClient(BaseUpstreamClient):
 
     @property
     def get_achievements_path(self) -> str: return "achievements/"
+
+    def get_social_login_url_path(
+            self,
+            provider: str
+    ) -> str:
+        return f"social/{provider}/login-url/"
 
     @property
     def patch_increment_achievement_value_path(self) -> str: return "achievements/increment_achievement_value/"
@@ -184,6 +194,19 @@ class UsersUpstreamClient(BaseUpstreamClient):
             auth=(settings.users_server_users_application_client_id, settings.users_server_users_application_client_secret)
         )
 
+    async def post_social_exchange_token(
+            self,
+            app_code: str,
+            provider: str
+    ) -> httpx.Response:
+        return await self.post(
+            self.post_social_exchange_token_path,
+            json={
+                "app_code": app_code,
+                "provider": provider
+            }
+        )
+
     async def get_me(
             self,
             user_authorization_token: str
@@ -235,6 +258,12 @@ class UsersUpstreamClient(BaseUpstreamClient):
             headers={"X-User-Authorization": f"Bearer {user_authorization_token}"},
             json={'category': transaction_data.model_dump(mode='json')['category']}
         )
+
+    async def get_social_login_url(
+            self,
+            provider: str
+    ) -> httpx.Response:
+        return await self.get(self.get_social_login_url_path(provider))
 
 
 class TransactionsUpstreamClient(BaseUpstreamClient):
