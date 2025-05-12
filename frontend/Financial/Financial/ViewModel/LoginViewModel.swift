@@ -19,7 +19,7 @@ class LoginViewViewModel: ObservableObject {
     @Published var isChecked = false {
         didSet {
             if isChecked {
-                print("Я тебе записав")
+                print("Read you")
             }
         }
     }
@@ -57,11 +57,13 @@ class LoginViewViewModel: ObservableObject {
             }
         } catch let error as NetworkError {
             
-            if case .clientError(let statusCode, let message) = error {
-                self.isValidEmail = false
-                self.isValidPassword = false
-                self.isLoginError = true
-                return false
+            if case .clientError(_, _) = error {
+                Task { @MainActor in
+                    self.isValidEmail = false
+                    self.isValidPassword = false
+                    self.isLoginError = true
+                    return false
+                }
             }
             if case .other = error {
                 self.isVisibleErrorResponse = true
@@ -69,7 +71,7 @@ class LoginViewViewModel: ObservableObject {
             }
         } catch {
             print("Інша помилка: \(error)")
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 self.isVisibleErrorResponse = true
             }
             return false
