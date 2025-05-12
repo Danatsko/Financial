@@ -142,6 +142,7 @@ AUTH_USER_MODEL = 'users.Users'
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=1).total_seconds()),
     "REFRESH_TOKEN_EXPIRE_SECONDS": int(datetime.timedelta(weeks=4).total_seconds()),
+    "ROTATE_REFRESH_TOKEN": True,
     "SCOPES": {
         "transactions:own:all:delete": "Allows deleting all of the user's own transactions.",
         "transactions:own:list:read": "Allows reading a list of the user's own transactions.",
