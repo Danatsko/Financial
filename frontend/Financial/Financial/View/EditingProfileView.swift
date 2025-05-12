@@ -22,6 +22,9 @@ struct EditingProfileView: View {
                     Text(imageName).tag(imageName)
                 }
             }
+            .onChange(of: imageName) { newValue in
+                viewModel.saveImageName(newValue)
+            }
             .pickerStyle(MenuPickerStyle())
             .tint(.white)
             .padding()
