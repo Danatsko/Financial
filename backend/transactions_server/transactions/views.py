@@ -181,22 +181,6 @@ class TransactionViewSet(
                 if type_name == type_name_for_budget:
                     total_spending_for_budget = total_for_this_type
 
-                all_categories_for_this_type = transaction_type.categories.all()
-                categories_with_activity_ids = transactions_for_this_type.values_list('category_id', flat=True).distinct()
-                categories_with_no_activity_qs = all_categories_for_this_type.exclude(id__in=categories_with_activity_ids)
-
-                if categories_with_no_activity_qs.exists():
-                    no_activity_category_names = list(categories_with_no_activity_qs.values_list('name', flat=True))
-
-                    recommendations_list.append({
-                        "status": "no_activity_in_category_last_month",
-                        "data": {
-                            "types": type_name,
-                            "categories": no_activity_category_names,
-                            "month": current_month
-                        }
-                    })
-
                 if total_for_this_type == 0:
                     recommendations_list.append({
                         "status": "no_transactions_for_type",
@@ -206,6 +190,12 @@ class TransactionViewSet(
                         }
                     })
                 else:
+                    all_categories_for_this_type = transaction_type.categories.all()
+                    categories_with_activity_ids = transactions_for_this_type.values_list(
+                        'category_id',
+                        flat=True
+                    ).distinct()
+                    categories_with_no_activity_qs = all_categories_for_this_type.exclude(id__in=categories_with_activity_ids)
                     category_sums_for_this_type_qs = transactions_for_this_type.values(
                         'category__id',
                         'category__name'
@@ -292,6 +282,18 @@ class TransactionViewSet(
                                 "types": type_name,
                                 "categories": max_count_categories_data_for_type,
                                 "count": max_count_for_type,
+                                "month": current_month
+                            }
+                        })
+
+                    if categories_with_no_activity_qs.exists():
+                        no_activity_category_names = list(categories_with_no_activity_qs.values_list('name', flat=True))
+
+                        recommendations_list.append({
+                            "status": "no_activity_in_category_last_month",
+                            "data": {
+                                "types": type_name,
+                                "categories": no_activity_category_names,
                                 "month": current_month
                             }
                         })
