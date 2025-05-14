@@ -224,6 +224,9 @@ final class ApiService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let decodeUser = try decoder.decode(UserResponseWrapper.self, from: data)
             
+            await CoreDataManager.shared.setEmail(decodeUser.user.email)
+            await CoreDataManager.shared.setMonthlyBudget(decodeUser.user.monthlyBudget)
+            
         } catch {
             throw error
         }
