@@ -26,7 +26,7 @@ actor TokenRefresher {
             throw NetworkError.refreshFailed(nil)
         }
         
-        guard let url = URL(string: "http://127.0.0.1:8001/api/users/refresh-token/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/users/refresh-token/") else {
             throw NetworkError.badURL
         }
         
