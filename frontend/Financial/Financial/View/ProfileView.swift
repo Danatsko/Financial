@@ -87,7 +87,7 @@ struct ProfileView: View {
         }
         .sheet(isPresented: $viewModel.showEditProfile) {
             EditingProfileView(imageName: $viewModel.imageName)
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $viewModel.showHelp) {
             HelpView()

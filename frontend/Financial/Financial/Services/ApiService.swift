@@ -206,6 +206,32 @@ final class ApiService {
         }
     }
     
+    func changeDataUser(email: String, monthBudget: Int) async throws {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/users/me/") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = ["email": email, "monthly_budget": monthBudget]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        
+        do {
+            let (data, _) = try await NetworkService.shared.performRequest(request)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let decodeUser = try decoder.decode(UserResponseWrapper.self, from: data)
+            
+            await CoreDataManager.shared.setEmail(decodeUser.user.email)
+            await CoreDataManager.shared.setMonthlyBudget(decodeUser.user.monthlyBudget)
+            
+        } catch {
+            throw error
+        }
+    }
+    
     
     func logoutUser() async throws {
         guard let url = URL(string: "http://127.0.0.1:8000/api/users/logout/") else {

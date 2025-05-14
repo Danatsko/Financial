@@ -71,6 +71,28 @@ public final class CoreDataManager {
         return fetchUser()?.creationDate
     }
     
+    func getMonthlyBudget() -> Int {
+        return Int(fetchUser()?.monthlyBudget ?? 0)
+    }
+    
+    func getEmail() -> String {
+        return fetchUser()?.email ?? ""
+    }
+    
+    func setMonthlyBudget(_ newBudget: Int) {
+        if var user = fetchUser() {
+            user.monthlyBudget = Int32(newBudget)
+            saveContext()
+        }
+    }
+    
+    func setEmail(_ newEmail: String) {
+        if var user = fetchUser() {
+            user.email = newEmail
+            saveContext()
+        }
+    }
+    
     func deleteUser() {
         if let user = fetchUser() {
             do {
