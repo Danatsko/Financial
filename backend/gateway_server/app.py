@@ -35,9 +35,7 @@ async def app_lifespan(app: FastAPI):
     )
 
     redis_connection_manager = RedisConnectionManager(
-        host=settings.redis_server_host,
-        port=settings.redis_server_port,
-        db=settings.redis_server_db
+        url=settings.redis_server_url
     )
 
     app.state.users_connection_manager = users_connection_manager

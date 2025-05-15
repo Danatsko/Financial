@@ -17,16 +17,12 @@ from exceptions.exceptions import (
 class RedisConnectionManager:
     def __init__(
             self,
-            host: str = "localhost",
-            port: int = 6379,
-            db: int = 0,
+            url: str,
             reconnect_interval: int = 60,
             circuit_breaker_fail_max: int = 3,
             circuit_breaker_reset_timeout: int = 60,
     ) -> None:
-        self.host = host
-        self.port = port
-        self.db = db
+        self.url = url
         self.client: RedisClient | None = None
         self.reconnect_interval = reconnect_interval
         self.circuit_breaker = CircuitBreaker(
@@ -43,9 +39,7 @@ class RedisConnectionManager:
     async def _initial_connect(self) -> None:
         try:
             self.client = RedisClient(
-                host=self.host,
-                port=self.port,
-                db=self.db,
+                url=self.url,
                 decode_responses=True,
             )
 
@@ -61,9 +55,7 @@ class RedisConnectionManager:
     async def _try_reconnect(self) -> None:
         try:
             self.client = RedisClient(
-                host=self.host,
-                port=self.port,
-                db=self.db,
+                url=self.url,
                 decode_responses=True,
             )
 
