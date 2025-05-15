@@ -21,9 +21,7 @@ class Settings(BaseSettings):
     transactions_server_gateway_application_client_secret: str
     transactions_server_gateway_scopes: str
 
-    redis_server_host: str
-    redis_server_port: int
-    redis_server_db: int
+    redis_server_url: str
 
 
 settings = Settings()
