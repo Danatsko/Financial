@@ -16,16 +16,12 @@ from exceptions.exceptions import (
 class RedisClient:
     def __init__(
             self,
-            host: str = "localhost",
-            port: int = 6379,
-            db: int = 0,
+            url: str,
             decode_responses: bool = True,
             **kwargs
     ):
         self._redis_client: redis.Redis | None = None
-        self._host = host
-        self._port = port
-        self._db = db
+        self._url = url
         self._decode_responses = decode_responses
         self._kwargs = kwargs
 
@@ -34,10 +30,8 @@ class RedisClient:
             return
 
         try:
-            self._redis_client = redis.Redis(
-                host=self._host,
-                port=self._port,
-                db=self._db,
+            self._redis_client = redis.Redis.from_url(
+                url=self._url,
                 decode_responses=self._decode_responses,
                 **self._kwargs
             )
