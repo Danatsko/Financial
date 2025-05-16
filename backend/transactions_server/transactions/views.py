@@ -65,31 +65,29 @@ class TransactionViewSet(
 
     @action(
         methods=['GET'],
-        detail=True,
+        detail=False,
         serializer_class=TransactionReadSerializer
     )
-    def get_transactions_data(self, request, pk):
+    def get_transactions_data(self, request):
+        base_queryset = self.get_queryset()
         serializer_date_range = DateRangeSerializer(data=request.query_params)
 
-        if serializer_date_range.is_valid():
-            start_date = serializer_date_range.validated_data['start_date']
-            end_date = serializer_date_range.validated_data['end_date']
-            transactions = Transaction.objects.filter(
-                user_id=pk,
-                creation_date__range=(start_date, end_date)
-            ).order_by('-creation_date')
+        serializer_date_range.is_valid(raise_exception=True)
 
-            if not transactions.exists():
-                return Response({
-                    'transactions': [],
-                    'detail': f'No transactions found for user ID {pk} in date range {start_date} - {end_date}.'
-                })
+        start_date = serializer_date_range.validated_data['start_date']
+        end_date = serializer_date_range.validated_data['end_date']
+        user_id = request.query_params.get('user_id')
+        transactions = base_queryset.filter(creation_date__range=(start_date, end_date)).order_by('-creation_date')
 
-            serialized_transactions = TransactionReadSerializer(transactions, many=True).data
+        if not transactions.exists():
+            return Response({
+                'transactions': [],
+                'detail': f'No transactions found for user ID {user_id} in date range {start_date} - {end_date}.'
+            })
 
-            return Response({'transactions': serialized_transactions})
-        else:
-            raise ValidationError(serializer_date_range.errors)
+        serialized_transactions = TransactionReadSerializer(transactions, many=True).data
+
+        return Response({'transactions': serialized_transactions})
 
     @action(
         methods=['GET'],
