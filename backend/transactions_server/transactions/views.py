@@ -332,12 +332,17 @@ class TransactionViewSet(
 
         return Response(response_data)
 
-    @action(methods=['DELETE'], detail=True)
-    def delete_all_user_transactions(self, request, pk):
-        transactions = Transaction.objects.filter(user_id=pk)
+    @action(
+        methods=['DELETE'],
+        detail=False
+    )
+    def delete_all_user_transactions(self, request):
+        base_queryset = self.get_queryset()
+        transactions = base_queryset
+        user_id = request.query_params.get('user_id')
 
         if not transactions.exists():
-            raise NotFound({'detail': f'No transactions found for user ID {pk}.'})
+            raise NotFound({'detail': f'No transactions found for user ID {user_id}.'})
 
         transactions.delete()
 
