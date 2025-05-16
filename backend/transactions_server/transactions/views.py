@@ -91,67 +91,65 @@ class TransactionViewSet(
 
     @action(
         methods=['GET'],
-        detail=True,
+        detail=False,
         serializer_class=TransactionReadSerializer
     )
-    def get_analyse_data(self, request, pk):
+    def get_analyse_data(self, request):
+        base_queryset = self.get_queryset()
         serializer_date_range = DateRangeSerializer(data=request.query_params)
 
-        if serializer_date_range.is_valid():
-            start_date = serializer_date_range.validated_data['start_date']
-            end_date = serializer_date_range.validated_data['end_date']
-            transactions = Transaction.objects.filter(
-                user_id=pk,
-                creation_date__range=(start_date, end_date)
-            ).order_by('-creation_date').select_related('category', 'type')
-            transaction_types = TransactionType.objects.all()
-            serialized_transactions_list = TransactionReadSerializer(transactions, many=True).data
-            categories_transactions = defaultdict(list)
-            types_data = {}
-            types_time_data = {}
-            interval = end_date - start_date
+        serializer_date_range.is_valid(raise_exception=True)
 
-            for serialized_transaction_dict in serialized_transactions_list:
-                categories_transactions[serialized_transaction_dict['category']].append(serialized_transaction_dict)
+        start_date = serializer_date_range.validated_data['start_date']
+        end_date = serializer_date_range.validated_data['end_date']
+        user_id = request.query_params.get('user_id')
+        transactions = base_queryset.filter(creation_date__range=(start_date, end_date)).order_by('-creation_date').select_related('category', 'type')
+        transaction_types = TransactionType.objects.all()
+        serialized_transactions_list = TransactionReadSerializer(transactions, many=True).data
+        categories_transactions = defaultdict(list)
+        types_data = {}
+        types_time_data = {}
+        interval = end_date - start_date
 
-            for type in transaction_types:
-                type_categories = TransactionCategory.objects.filter(type=type).values_list('name', flat=True)
-                type_qs = transactions.filter(type=type)
-                type_total = type_qs.aggregate(total=Sum('amount'))['total'] or 0
-                type_categories_data = {}
+        for serialized_transaction_dict in serialized_transactions_list:
+            categories_transactions[serialized_transaction_dict['category']].append(serialized_transaction_dict)
 
-                for category in type_categories:
-                    transactions_list = categories_transactions.get(category, [])
-                    category_sum = sum(transaction['amount'] for transaction in transactions_list)
-                    percentage = round((category_sum / type_total * 100), 1) if type_total > 0 else 0
-                    type_categories_data[category] = {
-                        'percentage': percentage,
-                        'transactions': transactions_list,
-                    }
+        for transaction_type in transaction_types:
+            type_categories = TransactionCategory.objects.filter(type=transaction_type).values_list('name', flat=True)
+            type_qs = transactions.filter(type=transaction_type)
+            type_total = type_qs.aggregate(total=Sum('amount'))['total'] or 0
+            type_categories_data = {}
 
-                if interval.days == 0:
-                    type_time_data = type_qs.aggregate_by_hour(start_date)
-                else:
-                    type_time_data = type_qs.aggregate_by_day(start_date, end_date)
-
-                types_time_data[type.name] = type_time_data
-                types_data[type.name] = {
-                    'total_amount': type_total,
-                    'categories': type_categories_data
+            for category in type_categories:
+                transactions_list = categories_transactions.get(category, [])
+                category_sum = sum(transaction['amount'] for transaction in transactions_list)
+                percentage = round((category_sum / type_total * 100), 1) if type_total > 0 else 0
+                type_categories_data[category] = {
+                    'percentage': percentage,
+                    'transactions': transactions_list,
                 }
 
-            response_data = {
-                'time_data': types_time_data,
-                'type_data': types_data
+            if interval.days == 0:
+                type_time_data = type_qs.aggregate_by_hour(start_date)
+            else:
+                type_time_data = type_qs.aggregate_by_day(start_date, end_date)
+
+            types_time_data[transaction_type.name] = type_time_data
+            types_data[transaction_type.name] = {
+                'total_amount': type_total,
+                'categories': type_categories_data
             }
 
-            if not transactions.exists():
-                response_data[
-                    'detail'] = f'No transactions found for user ID {pk} in date range {start_date} - {end_date}.'
+        response_data = {
+            'time_data': types_time_data,
+            'type_data': types_data
+        }
 
-            return Response(response_data)
-        else:
-            raise ValidationError(serializer_date_range.errors)
+        if not transactions.exists():
+            response_data[
+                'detail'] = f'No transactions found for user ID {user_id} in date range {start_date} - {end_date}.'
+
+        return Response(response_data)
 
     @action(
         methods=['GET'],
