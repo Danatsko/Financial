@@ -27,7 +27,8 @@ from transactions.serializers import (
     TransactionWriteSerializer,
     DateRangeSerializer,
     TransactionReadSerializer,
-    MonthlyBudgetSerializer
+    MonthlyBudgetSerializer,
+    UserIdSerializer
 )
 
 
@@ -47,6 +48,20 @@ class TransactionViewSet(
         'PATCH': [["svc:transactions:own:item:update"],],
         'DELETE': [["svc:transactions:own:all:delete"], ["svc:transactions:own:item:delete"]]
     }
+
+    def get_queryset(self):
+        queryset = Transaction.objects.all()
+
+        if self.action == 'create':
+            return queryset
+        else:
+            serializer_user_id = UserIdSerializer(data=self.request.query_params)
+
+            serializer_user_id.is_valid(raise_exception=True)
+
+            user_id = serializer_user_id.validated_data['user_id']
+
+            return queryset.filter(user_id=user_id)
 
     @action(
         methods=['GET'],
