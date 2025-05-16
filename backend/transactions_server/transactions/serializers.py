@@ -100,3 +100,7 @@ class DateRangeSerializer(serializers.Serializer):
 
 class MonthlyBudgetSerializer(serializers.Serializer):
     monthly_budget = serializers.FloatField(required=True)
+
+
+class UserIdSerializer(serializers.Serializer):
+    user_id = serializers.IntegerField(required=True)
