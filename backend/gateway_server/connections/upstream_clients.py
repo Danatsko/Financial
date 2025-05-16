@@ -282,29 +282,17 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
     ) -> str:
         return f"transactions/{transaction_id}/"
 
-    def get_transactions_data_path(
-            self,
-            user_id: str
-    ) -> str:
-        return f"transactions/{user_id}/get_transactions_data/"
+    @property
+    def get_transactions_data_path(self) -> str: return "transactions/get_transactions_data/"
 
-    def get_analyse_data_path(
-            self,
-            user_id: str
-    ) -> str:
-        return f"transactions/{user_id}/get_analyse_data/"
+    @property
+    def get_analyse_data_path(self) -> str: return "transactions/get_analyse_data/"
 
-    def get_monthly_recommendations_path(
-            self,
-            user_id: str
-    ) -> str:
-        return f"transactions/{user_id}/get_monthly_recommendations/"
+    @property
+    def get_monthly_recommendations_path(self) -> str: return "transactions/get_monthly_recommendations/"
 
-    def delete_all_user_transactions_path(
-            self,
-            user_id: str
-    ) -> str:
-        return f"transactions/{user_id}/delete_all_user_transactions/"
+    @property
+    def delete_all_user_transactions_path(self) -> str: return "transactions/delete_all_user_transactions/"
 
     async def post_transaction(
             self,
@@ -322,10 +310,12 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
     async def patch_transaction(
             self,
             transaction_id: TransactionIdPath,
+            user_id: str,
             new_transaction_data: PatchTransactionRequestBody
     ) -> httpx.Response:
         return await self.patch(
             self.patch_transaction_path(transaction_id),
+            params={"user_id": user_id},
             json=new_transaction_data.model_dump(
                 mode='json',
                 exclude_unset=True,
@@ -336,9 +326,11 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
     async def delete_transaction(
             self,
             transaction_id: TransactionIdPath,
+            user_id: str
     ) -> httpx.Response:
         return await self.delete(
             self.delete_transaction_path(transaction_id),
+            params={"user_id": user_id},
         )
 
     async def get_transactions_data(
@@ -347,8 +339,11 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
             date_range: GetDateRangeRequestParamsQuery,
     ) -> httpx.Response:
         return await self.get(
-            self.get_transactions_data_path(user_id),
-            params=date_range.model_dump(mode='json')
+            self.get_transactions_data_path,
+            params={
+                **date_range.model_dump(mode='json'),
+                "user_id": user_id
+            }
         )
 
     async def get_analyse_data(
@@ -357,8 +352,11 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
             date_range: GetDateRangeRequestParamsQuery,
     ) -> httpx.Response:
         return await self.get(
-            self.get_analyse_data_path(user_id),
-            params=date_range.model_dump(mode='json')
+            self.get_analyse_data_path,
+            params={
+                **date_range.model_dump(mode='json'),
+                "user_id": user_id
+            }
         )
 
     async def get_monthly_recommendations(
@@ -367,8 +365,11 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
             monthly_budget: GetMonthlyBudgetRequestParamsQuery,
     ) -> httpx.Response:
         return await self.get(
-            self.get_monthly_recommendations_path(user_id),
-            params=monthly_budget.model_dump(mode='json')
+            self.get_monthly_recommendations_path,
+            params={
+                **monthly_budget.model_dump(mode='json'),
+                "user_id": user_id
+            }
         )
 
     async def delete_all_user_transactions(
@@ -376,5 +377,6 @@ class TransactionsUpstreamClient(BaseUpstreamClient):
             user_id: str,
     ) -> httpx.Response:
         return await self.delete(
-            self.delete_all_user_transactions_path(user_id),
+            self.delete_all_user_transactions_path,
+            params={"user_id": user_id},
         )
