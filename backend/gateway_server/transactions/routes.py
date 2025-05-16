@@ -161,8 +161,14 @@ async def patch_transaction(
 async def delete_transaction(
         transaction_id: TransactionIdPath,
         user_authorization_token: str = Depends(get_user_authorization_token),
-        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client)
+        transactions_client: TransactionsUpstreamClient = Depends(get_transactions_upstream_client),
+        redis_client: RedisClient = Depends(get_redis_client)
 ):
-    delete_transaction_response = await transactions_client.delete_transaction(transaction_id)
+    user_id = await redis_client.retrieve_token_field(
+        token=user_authorization_token,
+        field='id'
+    )
+
+    delete_transaction_response = await transactions_client.delete_transaction(transaction_id, user_id)
 
     return None
