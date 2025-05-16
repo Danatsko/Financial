@@ -518,6 +518,30 @@ final class ApiService {
         }
     }
     
+    func getRecommendations(monthlyBudget: Int) async throws {
+        
+        guard let url = URL(string: "\(monthlyBudget)") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let (data, _) = try await NetworkService.shared.performRequest(request)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let decodeUser = try decoder.decode(UserResponseWrapper.self, from: data)
+            
+            await CoreDataManager.shared.setEmail(decodeUser.user.email)
+            await CoreDataManager.shared.setMonthlyBudget(decodeUser.user.monthlyBudget)
+            
+        } catch {
+            throw error
+        }
+    }
+    
     
     private func stringToDate(_ string: String) -> Date? {
         let formatterWithoutFractions = ISO8601DateFormatter()

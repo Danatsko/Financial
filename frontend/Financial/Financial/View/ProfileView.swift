@@ -36,6 +36,9 @@ struct ProfileView: View {
                     ProfileButton(imageName: "settings", title: "settings") {
                         viewModel.showSettings = true
                     }
+                    ProfileButton(imageName: "rectangleForRecommendations", title: "recommendations") {
+                        viewModel.showRecommendations = true
+                    }
                     ProfileButton(imageName: "question", title: "help") {
                         viewModel.showHelp = true
                     }
@@ -89,6 +92,9 @@ struct ProfileView: View {
             EditingProfileView(imageName: $viewModel.imageName)
                 .presentationDetents([.large])
         }
+        .sheet(isPresented: $viewModel.showRecommendations) {
+            RecommendationsView()
+        }
         .sheet(isPresented: $viewModel.showHelp) {
             HelpView()
         }
@@ -103,9 +109,21 @@ struct ProfileButton: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                Image(imageName)
-                    .resizable()
-                    .frame(width: 50, height: 50)
+                if imageName == "rectangleForRecommendations" {
+                    ZStack {
+                        Image(imageName)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Image(systemName: "message")
+                            .resizable()
+                            .frame(width: 28, height: 28)
+                        
+                    }
+                } else {
+                    Image(imageName)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                }
                 Text(title)
                     .font(.custom("Montserrat-SemiBold", size: 24))
             }

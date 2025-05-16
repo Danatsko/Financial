@@ -16,6 +16,7 @@ class ProfileViewViewModel: ObservableObject {
     @Published var showEditProfile = false
     @Published var showSettings = false
     @Published var showHelp = false
+    @Published var showRecommendations = false
     @Published var imageName = ""
     
     init() {
