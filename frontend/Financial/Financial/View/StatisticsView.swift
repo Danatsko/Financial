@@ -11,7 +11,7 @@ struct StatisticsView: View {
     @StateObject var viewModel = StatisticsViewModel()
     
     @ObservedObject var navigationService = NavigationServiceStatistics.shared
-    
+    @State var isPresentedTransaction: Bool = false
     
     var body: some View {
         NavigationStack(path: $navigationService.statisticsPath) {
@@ -112,11 +112,13 @@ struct StatisticsView: View {
                             
                             if viewModel.type == "costs" {
                                 CategoryStatistics(
-                                    viewModel: viewModel
+                                    viewModel: viewModel,
+                                    isPresented: $isPresentedTransaction
                                 )
                             } else if viewModel.type == "incomes" {
                                 CategoryStatistics(
-                                    viewModel: viewModel
+                                    viewModel: viewModel,
+                                    isPresented: $isPresentedTransaction
                                 )
                             }
                             
@@ -145,6 +147,12 @@ struct StatisticsView: View {
                 default:
                     MainView()
                 }
+            }
+            .sheet(isPresented: $isPresentedTransaction) {
+                CategoryTransactionsSheetView(
+                    categoryName: viewModel.categoryName,
+                    transactions: viewModel.arrayTransactionApi
+                )
             }
         }
     }

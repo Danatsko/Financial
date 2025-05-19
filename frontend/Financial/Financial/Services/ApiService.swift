@@ -54,7 +54,7 @@ struct CategoryInfo: Decodable {
     let transactions: [TransactionApi]
 }
 
-struct TransactionApi: Decodable {
+struct TransactionApi: Decodable, Identifiable {
     let id: Int
     let userId: Int
     let type: String
