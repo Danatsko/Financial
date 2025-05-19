@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryStatistics: View {
     
     @ObservedObject var viewModel: StatisticsViewModel
+    @Binding var isPresented: Bool
 
     var body: some View {
         ScrollView (.horizontal) {
@@ -24,6 +25,12 @@ struct CategoryStatistics: View {
                                 label: category.localizedName,
                                 transactions: category.transactions
                             )
+                            .onTapGesture {
+                                viewModel.arrayTransactionApi = category.transactions
+                                viewModel.categoryName = category.localizedName
+                                print(viewModel.categoryName)
+                                isPresented = true
+                            }
                         }
                     } else {
                         ForEach(viewModel.displayableCategoriesCosts) { category in
@@ -32,6 +39,12 @@ struct CategoryStatistics: View {
                                 label: category.localizedName,
                                 transactions: category.transactions
                             )
+                            .onTapGesture {
+                                viewModel.arrayTransactionApi = category.transactions
+                                viewModel.categoryName = category.localizedName
+                                print(viewModel.categoryName)
+                                isPresented = true
+                            }
                         }
                     }
                 }
