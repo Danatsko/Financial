@@ -29,6 +29,8 @@ class StatisticsViewModel: ObservableObject {
     @Published var isTypeSelected = false
     @Published var displayableCategoriesIncomes: [DisplayCategoryIncomesInfo] = []
     @Published var displayableCategoriesCosts: [DisplayCategoryCostsInfo] = []
+    @Published var arrayTransactionApi: [TransactionApi] = []
+    @Published var categoryName: String = ""
     
     
     
@@ -237,7 +239,7 @@ class StatisticsViewModel: ObservableObject {
                 appCategoryType: appCategoryType,
                 localizedName: localizedName,
                 percentage: categoryInfo.percentage,
-                transactions: []
+                transactions: categoryInfo.transactions
             )
         }.sorted { $0.localizedName < $1.localizedName }
     }
@@ -252,7 +254,7 @@ class StatisticsViewModel: ObservableObject {
                 appCategoryType: appCategoryType,
                 localizedName: localizedName,
                 percentage: categoryInfo.percentage,
-                transactions: []
+                transactions: categoryInfo.transactions
             )
         }.sorted { $0.localizedName < $1.localizedName }
     }
