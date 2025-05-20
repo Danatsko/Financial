@@ -2,7 +2,7 @@ FROM --platform=$TARGETPLATFORM python:3.13-slim AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/build_app
 
