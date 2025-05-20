@@ -8,35 +8,55 @@
 import SwiftUI
 
 struct RecommendationsView: View {
+    
+    @StateObject var viewModel = RecommendationsViewModel()
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
+                
                 MessageBubble(
-                    text: "Hi, how are you?",
-                    isSender: false,
-                    bubbleColor: Color.gray,
-                    textColor: .black
-                )
-
-                MessageBubble(
-                    text: "Everything is fine, thank you! How about you? This is a very long message to test how it will expand and transfer to new lines.",
+                    text: "Hello, show me my financial statement for last month",
                     isSender: true,
-                    bubbleColor: Color.blue,
-                    textColor: .white
-                )
-
-                MessageBubble(
-                    text: "Great!",
-                    isSender: false,
-                    bubbleColor: Color.gray,
+                    bubbleColor: Color.orange.opacity(0.8),
                     textColor: .black
                 )
+                
+                MessageBubble(
+                    text: "Hi, here's your financial report for last month",
+                    isSender: false,
+                    bubbleColor: Color(white: 0.9),
+                    textColor: .black
+                )
+                
+                if viewModel.isLoading {
+                    ProgressView("Downloading recommendations...")
+                } else if let error = viewModel.errorMessage {
+                    Text("Error: \(error)")
+                        .foregroundColor(.red)
+                } else {
+                    ForEach(viewModel.messages, id: \.self) { message in
+                        MessageBubble(
+                            text: message,
+                            isSender: false,
+                            bubbleColor: Color(white: 0.9),
+                            textColor: .black
+                        )
+                    }
+                }
             }
         }
         .padding()
+        .onAppear {
+            Task {
+                do {
+                    let jsonData = try await ApiService.shared.getRecommendations(monthlyBudget: CoreDataManager.shared.getMonthlyBudget())
+                    viewModel.fetchAndProcessRecommendations(jsonData: jsonData)
+                    print("Recommendations sussessfully fetched")
+                } catch {
+                    throw error
+                }
+            }
+        }
     }
-}
-
-#Preview {
-    RecommendationsView()
 }

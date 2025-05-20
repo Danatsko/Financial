@@ -6,6 +6,73 @@
 //  Copyright (c) 2025 Financial
 
 import Foundation
+import AnyCodable
+
+struct RecommendationsServerResponse: Decodable {
+    let recommendations: [RecommendationItem]
+}
+
+struct RecommendationItem: Decodable {
+    let status: String
+    let data: [String: AnyCodable]
+}
+
+
+struct NoTransactionsData: Decodable {
+    let types: String
+    let month: String
+}
+
+struct SumCategoryData: Decodable {
+    let types: String
+    let categories: [String]
+    let sum: Float
+    let month: String
+}
+
+struct CountCategoryData: Decodable {
+    let types: String
+    let categories: [String]
+    let count: Int
+    let month: String
+}
+
+struct NoActivityData: Decodable {
+    let types: String
+    let categories: [String]
+    let month: String
+}
+
+struct BudgetExceededData: Decodable {
+    let budgetAmount: Float
+    let totalSpent: Float
+    let excessAmount: Float
+    let month: String
+
+    enum CodingKeys: String, CodingKey {
+        case budgetAmount = "budget_amount"
+        case totalSpent = "total_spent"
+        case excessAmount = "excess_amount"
+        case month
+    }
+}
+
+struct BudgetWithinLimitData: Decodable {
+    let budgetAmount: Float
+    let totalSpent: Float
+    let remainingAmount: Float
+    let month: String
+
+    enum CodingKeys: String, CodingKey {
+        case budgetAmount = "budget_amount"
+        case totalSpent = "total_spent"
+        case remainingAmount = "remaining_amount"
+        case month
+    }
+}
+
+
+
 
 struct AchievementsResponseWrapper: Decodable {
     let achievements: AchievementsResponse
@@ -518,9 +585,11 @@ final class ApiService {
         }
     }
     
-    func getRecommendations(monthlyBudget: Int) async throws {
+    func getRecommendations(monthlyBudget: Int) async throws -> Data {
         
-        guard let url = URL(string: "\(monthlyBudget)") else {
+        guard let url = URL(
+            string: "http://127.0.0.1:8000/api/transactions/get_monthly_recommendations/?monthly_budget=\(monthlyBudget)"
+        ) else {
             throw URLError(.badURL)
         }
         
@@ -530,12 +599,8 @@ final class ApiService {
         
         do {
             let (data, _) = try await NetworkService.shared.performRequest(request)
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let decodeUser = try decoder.decode(UserResponseWrapper.self, from: data)
             
-            await CoreDataManager.shared.setEmail(decodeUser.user.email)
-            await CoreDataManager.shared.setMonthlyBudget(decodeUser.user.monthlyBudget)
+            return data
             
         } catch {
             throw error
