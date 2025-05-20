@@ -1,0 +1,53 @@
+name: Build and Push Transactions Server Image
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'backend/transactions_server/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Determine Environment Suffix and Tags
+        id: image_vars
+        run: |
+          branch_name="${{ github.ref_name }}"
+          if [[ "$branch_name" == "main" ]]; then
+            echo "env_suffix=prod" >> $GITHUB_OUTPUT
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          elif [[ "$branch_name" == "dev" ]]; then
+            echo "env_suffix=dev" >> $GITHUB_OUTPUT
+            echo "tag=latest" >> $GITHUB_OUTPUT 
+          else
+            echo "Branch $branch_name not configured for Docker build. Exiting."
+            exit 1
+          fi
+        shell: bash
+
+      - name: Build and push transactions_server image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/transactions_server
+          file: ./backend/transactions_server/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: danatsko/transactions_server_${{ steps.image_vars.outputs.env_suffix }}:${{ steps.image_vars.outputs.tag }}
