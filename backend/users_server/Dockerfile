@@ -16,7 +16,7 @@ COPY . /opt/build_app/app_code/
 
 WORKDIR /opt/build_app/app_code/
 
-RUN . /opt/venv/bin/activate && python manage.py collectstatic --noinput --clear
+RUN . /opt/venv/bin/activate && SECRET_KEY="dummy-secret-key-for-build-only-not-for-prod" python manage.py collectstatic --noinput --clear
 
 FROM --platform=$TARGETPLATFORM python:3.13-slim AS final
 
