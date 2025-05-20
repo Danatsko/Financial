@@ -29,9 +29,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 
 # Application definition
@@ -109,7 +109,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # }
 
 DATABASES = {
-    'default': env.db()
+    'default': env.db(default='sqlite:///:memory:')
 }
 
 # Password validation
@@ -147,6 +147,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -188,8 +190,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
-GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS')
-USERS_APPLICATION_CLIENT_IDS = env.list('USERS_APPLICATION_CLIENT_IDS')
+GATEWAY_APPLICATION_CLIENT_IDS = env.list('GATEWAY_APPLICATION_CLIENT_IDS', default=[])
+USERS_APPLICATION_CLIENT_IDS = env.list('USERS_APPLICATION_CLIENT_IDS', default=[])
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -234,7 +236,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_UNIQUE_EMAIL = True
 
-SOCIALACCOUNT_APPLICATION_CLIENT_ID = env.str('SOCIALACCOUNT_APPLICATION_CLIENT_ID')
+SOCIALACCOUNT_APPLICATION_CLIENT_ID = env.str('SOCIALACCOUNT_APPLICATION_CLIENT_ID', default='')
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Financial: users server',
