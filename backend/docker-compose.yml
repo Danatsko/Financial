@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  users-server:
+    image: ${USERS_SERVER_IMAGE}
+    # build:
+    #   context: ./users_server
+    #   dockerfile: Dockerfile
+    container_name: financial_users_server
+    environment:
+      SECRET_KEY: ${USERS_SECRET_KEY}
+      DEBUG: ${USERS_DEBUG}
+      ALLOWED_HOSTS: ${USERS_ALLOWED_HOSTS}
+      DATABASE_URL: ${USERS_DATABASE_URL}
+      GATEWAY_APPLICATION_CLIENT_IDS: ${USERS_GATEWAY_APPLICATION_CLIENT_IDS}
+      USERS_APPLICATION_CLIENT_IDS: ${USERS_USERS_APPLICATION_CLIENT_IDS}
+      SOCIALACCOUNT_APPLICATION_CLIENT_ID: ${USERS_SOCIALACCOUNT_APPLICATION_CLIENT_ID}
+    ports:
+      - "8001:8001"
+    networks:
+      - financial_network
+    restart: unless-stopped
+
+  transactions-server:
+    image: ${TRANSACTIONS_SERVER_IMAGE}
+    # build:
+    #   context: ./transactions_server
+    #   dockerfile: Dockerfile
+    container_name: financial_transactions_server
+    environment:
+      SECRET_KEY: ${TRANSACTIONS_SECRET_KEY}
+      DEBUG: ${TRANSACTIONS_DEBUG}
+      ALLOWED_HOSTS: ${TRANSACTIONS_ALLOWED_HOSTS}
+      DATABASE_URL: ${TRANSACTIONS_DATABASE_URL}
+      GATEWAY_APPLICATION_CLIENT_IDS: ${TRANSACTIONS_GATEWAY_APPLICATION_CLIENT_IDS}
+    ports:
+      - "8002:8002"
+    networks:
+      - financial_network
+    restart: unless-stopped
+
+  gateway-server:
+    image: ${GATEWAY_SERVER_IMAGE}
+    # build:
+    #   context: ./gateway_server
+    #   dockerfile: Dockerfile
+    container_name: financial_gateway_server
+    environment:
+      USERS_SERVER_URL: ${GATEWAY_USERS_SERVER_URL}
+      USERS_SERVER_GATEWAY_APPLICATION_CLIENT_ID: ${GATEWAY_USERS_SERVER_GATEWAY_APPLICATION_CLIENT_ID}
+      USERS_SERVER_GATEWAY_APPLICATION_CLIENT_SECRET: ${GATEWAY_USERS_SERVER_GATEWAY_APPLICATION_CLIENT_SECRET}
+      USERS_SERVER_USERS_APPLICATION_CLIENT_ID: ${GATEWAY_USERS_SERVER_USERS_APPLICATION_CLIENT_ID}
+      USERS_SERVER_USERS_APPLICATION_CLIENT_SECRET: ${GATEWAY_USERS_SERVER_USERS_APPLICATION_CLIENT_SECRET}
+      USERS_SERVER_GATEWAY_SCOPES: ${GATEWAY_USERS_SERVER_GATEWAY_SCOPES}
+      USERS_SERVER_USERS_SCOPES: ${GATEWAY_USERS_SERVER_USERS_SCOPES}
+      TRANSACTIONS_SERVER_URL: ${GATEWAY_TRANSACTIONS_SERVER_URL}
+      TRANSACTIONS_SERVER_GATEWAY_APPLICATION_CLIENT_ID: ${GATEWAY_TRANSACTIONS_SERVER_GATEWAY_APPLICATION_CLIENT_ID}
+      TRANSACTIONS_SERVER_GATEWAY_APPLICATION_CLIENT_SECRET: ${GATEWAY_TRANSACTIONS_SERVER_GATEWAY_APPLICATION_CLIENT_SECRET}
+      TRANSACTIONS_SERVER_GATEWAY_SCOPES: ${GATEWAY_TRANSACTIONS_SERVER_GATEWAY_SCOPES}
+      REDIS_SERVER_URL: ${GATEWAY_REDIS_SERVER_URL}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - users-server
+      - transactions-server
+    networks:
+      - financial_network
+    restart: unless-stopped
+
+networks:
+  financial_network:
+    driver: bridge
