@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Financial/InfoPlist.xcstrings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.2" build-num="16C5032a"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Financial</source>
+        <target state="new">Financial</target>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Financial/Localizable.xcstrings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.2" build-num="16C5032a"/>
+    </header>
+    <body>
+      <trans-unit id="" xml:space="preserve">
+        <source/>
+        <target state="new"/>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@" xml:space="preserve">
+        <source>%@</source>
+        <target state="new">%@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ %lld" xml:space="preserve">
+        <source>%1$@ %2$lld</source>
+        <target state="new">%1$@ %2$lld</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ - %@" xml:space="preserve">
+        <source>%1$@ - %2$@</source>
+        <target state="new">%1$@ - %2$@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ ₴%@" xml:space="preserve">
+        <source>%1$@ ₴%2$@</source>
+        <target state="new">%1$@ ₴%2$@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@₴" xml:space="preserve">
+        <source>%@₴</source>
+        <target state="new">%@₴</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld" xml:space="preserve">
+        <source>%lld</source>
+        <target state="new">%lld</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld / %lld" xml:space="preserve">
+        <source>%1$lld / %2$lld</source>
+        <target state="new">%1$lld / %2$lld</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld%%" xml:space="preserve">
+        <source>%lld%%</source>
+        <target state="new">%lld%%</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld:00" xml:space="preserve">
+        <source>%lld:00</source>
+        <target state="new">%lld:00</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="02/24" xml:space="preserve">
+        <source>02/24</source>
+        <target state="new">02/24</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Back" xml:space="preserve">
+        <source>Back</source>
+        <target state="new">Back</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change Avatar" xml:space="preserve">
+        <source>Change Avatar</source>
+        <target state="new">Change Avatar</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change data" xml:space="preserve">
+        <source>Change data</source>
+        <target state="new">Change data</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change email" xml:space="preserve">
+        <source>Change email</source>
+        <target state="new">Change email</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change monthly budget" xml:space="preserve">
+        <source>Change monthly budget</source>
+        <target state="new">Change monthly budget</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose a day" xml:space="preserve">
+        <source>Choose a day</source>
+        <target state="new">Choose a day</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose month" xml:space="preserve">
+        <source>Choose month</source>
+        <target state="new">Choose month</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose week" xml:space="preserve">
+        <source>Choose week</source>
+        <target state="new">Choose week</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose year" xml:space="preserve">
+        <source>Choose year</source>
+        <target state="new">Choose year</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Confirm data changes" xml:space="preserve">
+        <source>Confirm data changes</source>
+        <target state="new">Confirm data changes</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Data for categories not available" xml:space="preserve">
+        <source>Data for categories not available</source>
+        <target state="new">Data for categories not available</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Date" xml:space="preserve">
+        <source>Date</source>
+        <target state="new">Date</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <target state="new">Done</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Downloading recommendations..." xml:space="preserve">
+        <source>Downloading recommendations...</source>
+        <target state="new">Downloading recommendations...</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Error" xml:space="preserve">
+        <source>Error</source>
+        <target state="new">Error</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Error: %@" xml:space="preserve">
+        <source>Error: %@</source>
+        <target state="new">Error: %@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Financial" xml:space="preserve">
+        <source>Financial</source>
+        <target state="new">Financial</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Hello, World!" xml:space="preserve">
+        <source>Hello, World!</source>
+        <target state="new">Hello, World!</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Hour" xml:space="preserve">
+        <source>Hour</source>
+        <target state="new">Hour</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Invalid month or year" xml:space="preserve">
+        <source>Invalid month or year</source>
+        <target state="new">Invalid month or year</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Key" xml:space="preserve">
+        <source>Key</source>
+        <target state="new">Key</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Next" xml:space="preserve">
+        <source>Next</source>
+        <target state="new">Next</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="No transactions" xml:space="preserve">
+        <source>No transactions</source>
+        <target state="new">No transactions</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Not found data for display." xml:space="preserve">
+        <source>Not found data for display.</source>
+        <target state="new">Not found data for display.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="OK" xml:space="preserve">
+        <source>OK</source>
+        <target state="new">OK</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="There was an error on the server. Please try again in a few minutes." xml:space="preserve">
+        <source>There was an error on the server. Please try again in a few minutes.</source>
+        <target state="new">There was an error on the server. Please try again in a few minutes.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Value" xml:space="preserve">
+        <source>Value</source>
+        <target state="new">Value</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="__________" xml:space="preserve">
+        <source>__________</source>
+        <target state="new">__________</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="accountExists" xml:space="preserve">
+        <source>accountExists</source>
+        <target state="new">accountExists</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="analytics" xml:space="preserve">
+        <source>analytics</source>
+        <target state="new">analytics</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="cancel" xml:space="preserve">
+        <source>cancel</source>
+        <target state="new">cancel</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category" xml:space="preserve">
+        <source>category</source>
+        <target state="new">category</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category.animals" xml:space="preserve">
+        <source>category.animals</source>
+        <target state="new">category.animals</target>
+        <note>Назва категорії тварини</note>
+      </trans-unit>
+      <trans-unit id="category.beauty" xml:space="preserve">
+        <source>category.beauty</source>
+        <target state="new">category.beauty</target>
+        <note>Назва категорії косметика</note>
+      </trans-unit>
+      <trans-unit id="category.business" xml:space="preserve">
+        <source>category.business</source>
+        <target state="new">category.business</target>
+        <note>Назва категорії бізнес</note>
+      </trans-unit>
+      <trans-unit id="category.cafes" xml:space="preserve">
+        <source>category.cafes</source>
+        <target state="new">category.cafes</target>
+        <note>Назва категорії Кафе</note>
+      </trans-unit>
+      <trans-unit id="category.charity" xml:space="preserve">
+        <source>category.charity</source>
+        <target state="new">category.charity</target>
+        <note>Назва категорії благодійність</note>
+      </trans-unit>
+      <trans-unit id="category.clothing" xml:space="preserve">
+        <source>category.clothing</source>
+        <target state="new">category.clothing</target>
+        <note>Назва категорії одяг</note>
+      </trans-unit>
+      <trans-unit id="category.devices" xml:space="preserve">
+        <source>category.devices</source>
+        <target state="new">category.devices</target>
+        <note>Назва категорії Девайси</note>
+      </trans-unit>
+      <trans-unit id="category.entertainment" xml:space="preserve">
+        <source>category.entertainment</source>
+        <target state="new">category.entertainment</target>
+        <note>Назва категорії розваги</note>
+      </trans-unit>
+      <trans-unit id="category.other_costs" xml:space="preserve">
+        <source>category.other_costs</source>
+        <target state="new">category.other_costs</target>
+        <note>Назва категорії інші витрати</note>
+      </trans-unit>
+      <trans-unit id="category.other_payments" xml:space="preserve">
+        <source>category.other_payments</source>
+        <target state="new">category.other_payments</target>
+        <note>Назва категорії інші доходи</note>
+      </trans-unit>
+      <trans-unit id="category.payments" xml:space="preserve">
+        <source>category.payments</source>
+        <target state="new">category.payments</target>
+        <note>Назва категорії виплати</note>
+      </trans-unit>
+      <trans-unit id="category.products" xml:space="preserve">
+        <source>category.products</source>
+        <target state="new">category.products</target>
+        <note>Назва категорії Продукти</note>
+      </trans-unit>
+      <trans-unit id="category.transports" xml:space="preserve">
+        <source>category.transports</source>
+        <target state="new">category.transports</target>
+        <note>Назва категорії транспорт</note>
+      </trans-unit>
+      <trans-unit id="category.utilities" xml:space="preserve">
+        <source>category.utilities</source>
+        <target state="new">category.utilities</target>
+        <note>Назва категорії Утиліти</note>
+      </trans-unit>
+      <trans-unit id="chooseAvatar" xml:space="preserve">
+        <source>chooseAvatar</source>
+        <target state="new">chooseAvatar</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="choosePhoto" xml:space="preserve">
+        <source>choosePhoto</source>
+        <target state="new">choosePhoto</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="confirm" xml:space="preserve">
+        <source>confirm</source>
+        <target state="new">confirm</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="confirmLogOut" xml:space="preserve">
+        <source>confirmLogOut</source>
+        <target state="new">confirmLogOut</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="create" xml:space="preserve">
+        <source>create</source>
+        <target state="new">create</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="date" xml:space="preserve">
+        <source>date</source>
+        <target state="new">date</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="delete" xml:space="preserve">
+        <source>delete</source>
+        <target state="new">delete</target>
+        <note>Delete button</note>
+      </trans-unit>
+      <trans-unit id="description" xml:space="preserve">
+        <source>description</source>
+        <target state="new">description</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="editing" xml:space="preserve">
+        <source>editing</source>
+        <target state="new">editing</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="email" xml:space="preserve">
+        <source>email</source>
+        <target state="new">email</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="incorrectEmail" xml:space="preserve">
+        <source>incorrectEmail</source>
+        <target state="new">incorrectEmail</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="incorrectPassword" xml:space="preserve">
+        <source>incorrectPassword</source>
+        <target state="new">incorrectPassword</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="logOut" xml:space="preserve">
+        <source>logOut</source>
+        <target state="new">logOut</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="logWith" xml:space="preserve">
+        <source>logWith</source>
+        <target state="new">logWith</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="login" xml:space="preserve">
+        <source>login</source>
+        <target state="new">login</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="newTransaction" xml:space="preserve">
+        <source>newTransaction</source>
+        <target state="new">newTransaction</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="noAccount" xml:space="preserve">
+        <source>noAccount</source>
+        <target state="new">noAccount</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="passwordsNotMatch" xml:space="preserve">
+        <source>passwordsNotMatch</source>
+        <target state="new">passwordsNotMatch</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="paymentMethod" xml:space="preserve">
+        <source>paymentMethod</source>
+        <target state="new">paymentMethod</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="statistics" xml:space="preserve">
+        <source>statistics</source>
+        <target state="new">statistics</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="title" xml:space="preserve">
+        <source>title</source>
+        <target state="new">title</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="transactions" xml:space="preserve">
+        <source>transactions</source>
+        <target state="new">transactions</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="transactionsEmpty" xml:space="preserve">
+        <source>transactionsEmpty</source>
+        <target state="new">transactionsEmpty</target>
+        <note>Message when transactions list is empty</note>
+      </trans-unit>
+      <trans-unit id="warning" xml:space="preserve">
+        <source>warning</source>
+        <target state="new">warning</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="yourBalance" xml:space="preserve">
+        <source>yourBalance</source>
+        <target state="new">yourBalance</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="День" xml:space="preserve">
+        <source>День</source>
+        <target state="new">День</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Змінити період" xml:space="preserve">
+        <source>Змінити період</source>
+        <target state="new">Змінити період</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Місяць" xml:space="preserve">
+        <source>Місяць</source>
+        <target state="new">Місяць</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть дату" xml:space="preserve">
+        <source>Оберіть дату</source>
+        <target state="new">Оберіть дату</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть день" xml:space="preserve">
+        <source>Оберіть день</source>
+        <target state="new">Оберіть день</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть тип" xml:space="preserve">
+        <source>Оберіть тип</source>
+        <target state="new">Оберіть тип</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Обраний період" xml:space="preserve">
+        <source>Обраний період</source>
+        <target state="new">Обраний період</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Обрати період" xml:space="preserve">
+        <source>Обрати період</source>
+        <target state="new">Обрати період</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Очистити форму" xml:space="preserve">
+        <source>Очистити форму</source>
+        <target state="new">Очистити форму</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Тиждень" xml:space="preserve">
+        <source>Тиждень</source>
+        <target state="new">Тиждень</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="₴" xml:space="preserve">
+        <source>₴</source>
+        <target state="new">₴</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
