@@ -19,7 +19,7 @@ class StatisticsViewModel: ObservableObject {
     @Published var isDateSelected: Bool = false
     @Published var dateStatistics: Date = Date()
     @Published var selectedYear: Int = 2020
-    @Published var selectedMonth: String = "Січень"
+    @Published var selectedMonth: String = "january"
     @Published var selectedDay = Date()
     @Published var selectedWeek: [Date] = [Date(), Date()]
     @Published var years: [Int] = []
@@ -35,8 +35,8 @@ class StatisticsViewModel: ObservableObject {
     
     
     @Published var months: [String] = [
-        "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
-        "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+        "january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december"
     ]
     
     init() {
@@ -91,23 +91,22 @@ class StatisticsViewModel: ObservableObject {
         let monthNumber: Int?
         
         switch monthName {
-        case "Січень": monthNumber = 1
-        case "Лютий": monthNumber = 2
-        case "Березень": monthNumber = 3
-        case "Квітень": monthNumber = 4
-        case "Травень": monthNumber = 5
-        case "Червень": monthNumber = 6
-        case "Липень": monthNumber = 7
-        case "Серпень": monthNumber = 8
-        case "Вересень": monthNumber = 9
-        case "Жовтень": monthNumber = 10
-        case "Листопад": monthNumber = 11
-        case "Грудень": monthNumber = 12
+        case "january": monthNumber = 1
+        case "february": monthNumber = 2
+        case "march": monthNumber = 3
+        case "april": monthNumber = 4
+        case "may": monthNumber = 5
+        case "june": monthNumber = 6
+        case "july": monthNumber = 7
+        case "august": monthNumber = 8
+        case "september": monthNumber = 9
+        case "october": monthNumber = 10
+        case "november": monthNumber = 11
+        case "december": monthNumber = 12
         default: monthNumber = nil
         }
         
         guard let month = monthNumber else {
-            print("Неправильна назва місяця: \(monthName)")
             return (nil, nil)
         }
         
@@ -117,11 +116,9 @@ class StatisticsViewModel: ObservableObject {
         dateComponents.day = 1
         
         guard let date = calendar.date(from: dateComponents) else {
-            print("Не вдалося створити дату з DateComponents")
             return (nil, nil)
         }
         
-        print("monthNumber успішно заробив і \(date)")
         return (calendar.component(.month, from: date), date)
     }
     
