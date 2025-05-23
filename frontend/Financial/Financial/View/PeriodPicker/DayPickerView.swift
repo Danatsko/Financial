@@ -45,7 +45,7 @@ struct DayPickerView: View {
                 viewModel.isDateSelected.toggle()
                 navigationService.goBack()
             } label: {
-                Text("Done")
+                Text("done")
                     .font(.custom("Montserrat-SemiBold", size: 20))
                     .padding()
                     .background(Color.buttonLogin)
