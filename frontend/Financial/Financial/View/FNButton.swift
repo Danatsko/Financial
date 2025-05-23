@@ -18,7 +18,7 @@ struct FNButton: View {
                 await action()
             }
         }) {
-            Text(text)
+            Text(LocalizedStringKey(text))
                 .font(.custom("Montserrat-SemiBold", size: 20))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, maxHeight: 55)
