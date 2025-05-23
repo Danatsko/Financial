@@ -16,24 +16,47 @@ struct RecommendationsView: View {
             VStack(spacing: 10) {
                 
                 MessageBubble(
-                    text: "Hello, show me my financial statement for last month",
+                    text: .localizedFormat("user.startConversation"),
                     isSender: true,
                     bubbleColor: Color.orange.opacity(0.8),
                     textColor: .black
                 )
                 
                 MessageBubble(
-                    text: "Hi, here's your financial report for last month",
+                    text: .localizedFormat("greeting.requestReport"),
+                    isSender: false,
+                    bubbleColor: Color(white: 0.9),
+                    textColor: .black
+                )
+                
+                MessageBubble(
+                    text: .localizedFormat("greeting.reportReady"),
                     isSender: false,
                     bubbleColor: Color(white: 0.9),
                     textColor: .black
                 )
                 
                 if viewModel.isLoading {
-                    ProgressView("Downloading recommendations...")
-                } else if let error = viewModel.errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundColor(.red)
+                    MessageBubble(
+                        text: .localizedFormat("recommendations.downloading"),
+                        isSender: false,
+                        bubbleColor: Color(white: 0.9),
+                        textColor: .black
+                    )
+                } else if let _ = viewModel.errorMessage {
+                    MessageBubble(
+                        text: .localizedFormat("recommendations.downloading"),
+                        isSender: false,
+                        bubbleColor: Color(white: 0.9),
+                        textColor: .black
+                    )
+                } else if viewModel.messages.isEmpty {
+                    MessageBubble(
+                        text: .localizedFormat("recommendations.downloading"),
+                        isSender: false,
+                        bubbleColor: Color(white: 0.9),
+                        textColor: .black
+                    )
                 } else {
                     ForEach(viewModel.messages, id: \.self) { message in
                         MessageBubble(
@@ -52,7 +75,6 @@ struct RecommendationsView: View {
                 do {
                     let jsonData = try await ApiService.shared.getRecommendations(monthlyBudget: CoreDataManager.shared.getMonthlyBudget())
                     viewModel.fetchAndProcessRecommendations(jsonData: jsonData)
-                    print("Recommendations sussessfully fetched")
                 } catch {
                     throw error
                 }
