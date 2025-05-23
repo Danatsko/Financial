@@ -20,8 +20,8 @@ struct MonthPickerView: View {
             
             
             Picker("Choose month", selection: $viewModel.selectedMonth) {
-                ForEach(viewModel.months, id:\.self) { year in
-                    Text("\(year)").tag(year)
+                ForEach(viewModel.months, id:\.self) { month in
+                    Text(LocalizedStringKey(month)).tag(month)
                 }
             }
             .pickerStyle(.wheel)
@@ -41,7 +41,7 @@ struct MonthPickerView: View {
                     viewModel.isDateSelected.toggle()
                     navigationService.goBack()
                 } label: {
-                    Text("Done")
+                    Text("done")
                         .font(.custom("Montserrat-SemiBold", size: 20))
                         .padding()
                         .background(Color.buttonLogin)

@@ -100,7 +100,7 @@ struct TransactionInputFieldsView: View {
                     ForEach(
                         viewModel.selectoryCategory(), id: \.self
                     ) { category in
-                        Text(category)
+                        Text(LocalizedStringKey(category))
                             .font(viewModel.customFont)
                     }
                 }
@@ -122,7 +122,7 @@ struct TransactionInputFieldsView: View {
                     ForEach(
                         viewModel.paymentArray, id: \.self
                     ) { category in
-                        Text(category)
+                        Text(LocalizedStringKey(category))
                             .font(viewModel.customFont)
                     }
                 }
@@ -144,7 +144,7 @@ struct TransactionInputFieldsView: View {
                     "",
                     selection: $viewModel.dateCreate,
                     in: viewModel.minDate...viewModel.maxDate,
-                    displayedComponents: .date
+                    displayedComponents: [.date, .hourAndMinute]
                 )
                 .tint(Color.white)
                 .padding(.trailing)
@@ -154,7 +154,7 @@ struct TransactionInputFieldsView: View {
              .cornerRadius(30)
 
             
-            Button("Очистити форму") {
+            Button("cleanForm") {
                 viewModel.resetForm()
             }
             .foregroundColor(.red)

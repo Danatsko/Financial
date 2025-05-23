@@ -16,7 +16,7 @@ struct ProgressGoalView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(text)
+                Text(LocalizedStringKey(text))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.white)
                 Spacer()

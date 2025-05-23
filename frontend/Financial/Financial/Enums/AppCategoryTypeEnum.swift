@@ -40,27 +40,27 @@ enum AppCategoryTypeCosts {
     var localizedName: String {
         switch self {
         case .Products:
-            return NSLocalizedString("category.products", comment: "Назва категорії Продукти")
+            return NSLocalizedString("products", comment: "Назва категорії Продукти")
         case .Devices:
-            return NSLocalizedString("category.devices", comment: "Назва категорії Девайси")
+            return NSLocalizedString("devices", comment: "Назва категорії Девайси")
         case .CafesRestaurants:
-            return NSLocalizedString("category.cafes", comment: "Назва категорії Кафе")
+            return NSLocalizedString("cafes_restaurants", comment: "Назва категорії Кафе")
         case .UtilitiesHome:
-            return NSLocalizedString("category.utilities", comment: "Назва категорії Утиліти")
+            return NSLocalizedString("utilities_home", comment: "Назва категорії Утиліти")
         case .Entertainment:
-            return NSLocalizedString("category.entertainment", comment: "Назва категорії розваги")
+            return NSLocalizedString("entertainment", comment: "Назва категорії розваги")
         case .Transports:
-            return NSLocalizedString("category.transports", comment: "Назва категорії транспорт")
+            return NSLocalizedString("transports", comment: "Назва категорії транспорт")
         case .Animals:
-            return NSLocalizedString("category.animals", comment: "Назва категорії тварини")
+            return NSLocalizedString("animals", comment: "Назва категорії тварини")
         case .BeautyHealth:
-            return NSLocalizedString("category.beauty", comment: "Назва категорії косметика")
+            return NSLocalizedString("beauty_health", comment: "Назва категорії косметика")
         case .ClothingAccessories:
-            return NSLocalizedString("category.clothing", comment: "Назва категорії одяг")
+            return NSLocalizedString("clothing_accessories", comment: "Назва категорії одяг")
         case .Charity:
-            return NSLocalizedString("category.charity", comment: "Назва категорії благодійність")
+            return NSLocalizedString("charity", comment: "Назва категорії благодійність")
         case .OtherSourcesOfCosts:
-            return NSLocalizedString("category.other_costs", comment: "Назва категорії інші витрати")
+            return NSLocalizedString("other_sources_of_costs", comment: "Назва категорії інші витрати")
             
         }
     }
@@ -82,11 +82,11 @@ enum AppCategoryTypeIncomes {
     var localizedName: String {
         switch self {
         case .Business:
-            return NSLocalizedString("category.business", comment: "Назва категорії бізнес")
+            return NSLocalizedString("business", comment: "Назва категорії бізнес")
         case .Payments:
-            return NSLocalizedString("category.payments", comment: "Назва категорії виплати")
+            return NSLocalizedString("payments", comment: "Назва категорії виплати")
         default:
-            return NSLocalizedString("category.other_payments", comment: "Назва категорії інші доходи")
+            return NSLocalizedString("other_sources_of_income", comment: "Назва категорії інші доходи")
         }
     }
 }

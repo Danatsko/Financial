@@ -39,7 +39,3 @@ struct MessageBubble: View {
         }
     }
 }
-
-#Preview {
-    RecommendationsView()
-}

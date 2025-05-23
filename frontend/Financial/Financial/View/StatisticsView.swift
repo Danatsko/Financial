@@ -63,17 +63,17 @@ struct StatisticsView: View {
                             } else {
                                 HStack(spacing: 16) {
                                     HStack {
-                                        Button("День") {
+                                        Button("day") {
                                             viewModel.typePeriod = PeriodEnum.day
                                         }
                                         .foregroundColor(viewModel.typePeriod == PeriodEnum.day ? Color("ButtonIncome") : .white)
                                         
-                                        Button("Тиждень") {
+                                        Button("week") {
                                             viewModel.typePeriod = .week
                                         }
                                         .foregroundColor(viewModel.typePeriod == PeriodEnum.week ? Color("ButtonIncome") : .white)
                                         
-                                        Button("Місяць") {
+                                        Button("month") {
                                             viewModel.typePeriod = .month
                                         }
                                         .foregroundColor(viewModel.typePeriod == PeriodEnum.month ? Color("ButtonIncome") : .white)
@@ -84,7 +84,7 @@ struct StatisticsView: View {
                                 Button {
                                     navigationService.goToYearPicker()
                                 } label: {
-                                    Text("Обрати період")
+                                    Text("choose period")
                                         .padding()
                                         .font(.custom("Montserrat-Bold", size: 13))
                                         .foregroundColor(.white)

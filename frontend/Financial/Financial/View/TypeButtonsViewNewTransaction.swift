@@ -25,7 +25,7 @@ struct TypeButtonsViewNewTransaction: View {
                 action: incomeAction
             )
             CategoryButtonNewTransactionView(
-                title: "expenses",
+                title: "expense",
                 imageName: "arrowDown",
                 backgroundName: "growthBackround",
                 isDisabled: costsButtonState,
@@ -50,7 +50,7 @@ struct CategoryButtonNewTransactionView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 20))
                 Spacer()

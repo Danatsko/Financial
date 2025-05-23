@@ -28,7 +28,7 @@ struct TypeButtonsViewStatistics: View {
             CategoryButtonStatisticsView(
                 amount: formattedStringCosts,
                 type: "Витрати",
-                title: "expenses",
+                title: "expense",
                 imageName: "arrowDown",
                 isDisabled: viewModel.costsButtonState) {
                     viewModel.buttonToggle(isIncomeButton: false)
@@ -58,7 +58,7 @@ struct CategoryButtonStatisticsView: View {
                     .frame(width: 30, height: 60)
                 
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 15))
                     
