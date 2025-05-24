@@ -252,7 +252,7 @@ async def get_achievements(
     response_model=GetSocialLoginUrlResponse
 )
 async def get_social_login_url(
-        provider: str = ProviderPath,
+        provider: ProviderPath,
         users_client: UsersUpstreamClient = Depends(get_users_upstream_client)
 ):
     get_social_login_url_response = await users_client.get_social_login_url(provider=provider)
