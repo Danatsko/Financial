@@ -1070,9 +1070,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "help" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1086,6 +1083,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Допомога"
+          }
+        }
+      }
+    },
+    "Highest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Highest"
           }
         }
       }
@@ -1284,6 +1292,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увійти за допомогою"
+          }
+        }
+      }
+    },
+    "Lowest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lowest"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Найнижча"
           }
         }
       }
@@ -1939,6 +1964,57 @@
         }
       }
     },
+    "user.budgetExceeded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You exceeded your monthly budget (%.2f) in %@. You spent %.2f, which is %.2f over the limit. Consider reviewing your biggest expenses."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш бюджет на місяць (%.2f) за %@ було перевищено. Ви витратили %.2f, що на %.2f більше запланованого. Спробуйте переглянути найбільші витрати."
+          }
+        }
+      }
+    },
+    "user.budgetWithinLimit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Great job! You stayed within your monthly budget of %.2f for %@. You spent %.2f, leaving %.2f unspent. Keep it up!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чудово! Ви вклались у бюджет (%.2f) за %@. Загальні витрати — %.2f, залишок — %.2f. Продовжуйте в тому ж дусі!"
+          }
+        }
+      }
+    },
+    "user.categoryCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ number of transactions for type \\\"%@\\\" in %@ happened in \\\"%@\\\" (%d total). This might reveal spending patterns."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ кількість транзакцій за типом \\\"%@\\\" у %@ була в категоріях \\\"%@\\\" (усього %d). Це може свідчити про ваші звички."
+          }
+        }
+      }
+    },
     "user.noActivity.costs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1969,6 +2045,23 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "У вас не було транзакцій типу %@ за %@. Спробуйте фіксувати навіть незначні витрати — це допоможе краще зрозуміти ваші фінансові звички."
+          }
+        }
+      }
+    },
+    "user.noCategoryActivity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You had no activity in the following categories during %@: %@ (for type \\\"%@\\\"). Are these categories still relevant to you?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "За %@ у вас не було жодної активності в категоріях: %@ (для типу \\\"%@\\\"). Можливо, варто проаналізувати, чи ці категорії актуальні для вас."
           }
         }
       }

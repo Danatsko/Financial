@@ -7,6 +7,7 @@
 
 import Foundation
 import AnyCodable
+import SwiftUICore
 
 class RecommendationsViewModel: ObservableObject {
     @Published var messages: [String] = []
@@ -43,8 +44,8 @@ class RecommendationsViewModel: ObservableObject {
                        let month = data["month"]?.value as? String {
                         let typeText = (type == "costs") ? "expenses" : "income"
                         let label = item.status.contains("lowest") ? "Lowest" : "Highest"
-                        let cats = categories.joined(separator: ", ")
-                        generatedMessages.append(.localizedFormat("user.categoryTotal", label, typeText, formartType(type), formatMonth(month), cats, sum))
+                        let cats = localizedCategories(categories)
+                        generatedMessages.append(.localizedFormat("user.categoryTotal", label, typeText, formartType(type), formatMonth(month), LocalizedStringKey(cats) as! CVarArg, sum))
                     }
 
                 case "lowest_count_category_for_type", "highest_count_category_for_type":
@@ -53,7 +54,7 @@ class RecommendationsViewModel: ObservableObject {
                        let count = data["count"]?.value as? Int,
                        let month = data["month"]?.value as? String {
                         let label = item.status.contains("lowest") ? "Lowest" : "Highest"
-                        let cats = categories.joined(separator: ", ")
+                        let cats = localizedCategories(categories)
                         generatedMessages.append(.localizedFormat("user.categoryCount", label, formartType(type), formatMonth(month), cats, count))
                     }
 
@@ -61,7 +62,7 @@ class RecommendationsViewModel: ObservableObject {
                     if let type = data["types"]?.value as? String,
                        let categories = data["categories"]?.value as? [String],
                        let month = data["month"]?.value as? String {
-                        let cats = categories.joined(separator: ", ")
+                        let cats = localizedCategories(categories)
                         generatedMessages.append(.localizedFormat("user.noCategoryActivity", formatMonth(month), cats, formartType(type)))
                     }
 
@@ -114,6 +115,12 @@ class RecommendationsViewModel: ObservableObject {
             return formatter.string(from: date)
         }
         return monthString
+    }
+    
+    private func localizedCategories(_ categories: [String]) -> String {
+        categories
+            .map { NSLocalizedString($0, comment: "") } // шукає локалізовану назву
+            .joined(separator: ", ")
     }
 }
 

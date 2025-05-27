@@ -6,10 +6,15 @@
 //  Copyright (c) 2025 Financial
 
 import SwiftUI
+import AVKit
 
 struct HelpView: View {
+    
+    private let player = AVPlayer(url: Bundle.main.url(forResource: "HelpView", withExtension: "mov")!)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VideoPlayer(player: player)
+            .padding()
     }
 }
 
