@@ -3,7 +3,7 @@
 //  Financial
 //
 //  Created by KeeR ReeK on 14.05.2025.
-//
+//  Copyright (c) 2025 Financial
 
 import SwiftUI
 
@@ -20,7 +20,7 @@ struct MessageBubble: View {
             }
 
             VStack(alignment: isSender ? .trailing : .leading, spacing: 0) {
-                Text(text)
+                Text(LocalizedStringKey(text))
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                     .foregroundColor(textColor)
