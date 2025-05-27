@@ -123,12 +123,12 @@ struct TransactionEditView: View {
     }
     
     private func pickerRow<SelectionValue: Hashable, Content: View>(
-        titleKey: LocalizedStringKey,
+        titleKey: String,
         selection: Binding<SelectionValue>,
         @ViewBuilder content: () -> Content
     ) -> some View {
         HStack {
-            Text(titleKey)
+            Text(LocalizedStringKey(titleKey))
                 .foregroundColor(StyleConstants.primaryTextColor)
                 .font(customInputFont)
             Spacer()
@@ -136,7 +136,7 @@ struct TransactionEditView: View {
                 content()
             }
             .pickerStyle(MenuPickerStyle())
-            .tint(StyleConstants.primaryTextColor) // Колір стрілки пікера
+            .tint(StyleConstants.primaryTextColor)
         }
         .padding(StyleConstants.defaultPadding)
         .frame(minHeight: 48)
@@ -147,7 +147,7 @@ struct TransactionEditView: View {
     private var categoryPicker: some View {
         pickerRow(titleKey: "category", selection: $viewModel.pickedCategory) {
             ForEach(viewModel.selectoryCategory(), id: \.self) { category in
-                Text(category)
+                Text(LocalizedStringKey(category))
                     .font(customInputFont)
                     .foregroundColor(StyleConstants.primaryTextColor)
             }
@@ -157,7 +157,7 @@ struct TransactionEditView: View {
     private var paymentMethodPicker: some View {
         pickerRow(titleKey: "paymentMethod", selection: $viewModel.pickedPayment) {
             ForEach(viewModel.paymentArray, id: \.self) { paymentMethod in
-                Text(paymentMethod)
+                Text(LocalizedStringKey(paymentMethod))
                     .font(customInputFont)
                     .foregroundColor(StyleConstants.primaryTextColor)
             }
@@ -171,7 +171,7 @@ struct TransactionEditView: View {
                 .font(customInputFont)
                 .padding(.leading)
             
-            DatePicker("", selection: $viewModel.dateCreate, in: viewModel.minDate...viewModel.maxDate, displayedComponents: .date)
+            DatePicker("", selection: $viewModel.dateCreate, in: viewModel.minDate...viewModel.maxDate, displayedComponents: [.date, .hourAndMinute])
                 .labelsHidden()
                 .tint(StyleConstants.primaryTextColor)
                 .preferredColorScheme(.dark)

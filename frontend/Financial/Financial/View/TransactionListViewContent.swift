@@ -14,6 +14,7 @@ struct TransactionListViewContent: View {
     var coreDataManager = CoreDataManager.shared
     @Binding var path: NavigationPath
     @EnvironmentObject var appState: AppState
+    @Environment(\.locale) var locale
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)],
@@ -55,7 +56,6 @@ struct TransactionListViewContent: View {
                 do {
                     try await ApiService.shared.deleteTransaction(id: Int(transaction.serverId))
                     coreDataManager.deleteTransaction(transaction: transaction)
-                    print("Видалено упішно")
                 } catch let error as NetworkError {
                     if case .refreshFailed = error {
                         coreDataManager.deleteUser()
@@ -76,6 +76,7 @@ struct TransactionListViewContent: View {
             let date = transaction.date ?? Date()
             let formatter = DateFormatter()
             formatter.dateFormat = "LLLL yyyy"
+            formatter.locale = locale 
             return formatter.string(from: date)
         }
     }

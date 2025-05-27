@@ -57,14 +57,14 @@ struct ProfileView: View {
                             Button("confirm", role: .destructive) {
                                 Task {
                                     if await viewModel.logoutApi() {
-                                        if await viewModel.logout() {
+                                        if viewModel.logout() {
+                                            CoreDataManager.shared.deleteUser()
                                             appState.isLoggedIn = false
                                         }
                                     }
-                                    CoreDataManager.shared.deleteUser()
+                                    KeychainManager.standard.deleteAllTokens()
+                                    appState.isLoggedIn = false
                                 }
-                                appState.isLoggedIn = false
-                                CoreDataManager.shared.deleteUser()
                             }
                         } message: {
                             Text("confirmLogOut")

@@ -14,8 +14,8 @@ enum KeychainKey: String {
     case refreshToken
 }
 
-class KeychainService {
-    static let standard = KeychainService()
+class KeychainManager {
+    static let standard = KeychainManager()
 
     private init() {}
     

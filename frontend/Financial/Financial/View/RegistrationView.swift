@@ -47,8 +47,6 @@ struct RegistationView: View {
                 .disabled(viewModel.isAvaibleRegistration())
                 .opacity(viewModel.isAvaibleRegistration() ? 0.5 : 1.0)
                 
-                OrDividerView()
-                
                 
                 HStack {
                     Text("accountExists")

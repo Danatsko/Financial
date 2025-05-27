@@ -14,7 +14,7 @@ struct TransactionDetailRowView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.custom("Montserrat-Bold", size: 21))
             
             RoundedRectangle(cornerRadius: 30)
@@ -22,7 +22,7 @@ struct TransactionDetailRowView: View {
                 .frame(height: CGFloat(height))
                 .overlay(
                     ScrollView {
-                        Text(value)
+                        Text(LocalizedStringKey(value))
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .padding()
                         

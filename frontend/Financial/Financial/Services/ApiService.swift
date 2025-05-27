@@ -205,8 +205,8 @@ final class ApiService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let decodeUser = try decoder.decode(UserResponse.self, from: data)
             
-            KeychainService.standard.saveAccessToken(token: decodeUser.accessToken ?? nil)
-            KeychainService.standard.saveRefreshToken(token: decodeUser.refreshToken ?? nil)
+            KeychainManager.standard.saveAccessToken(token: decodeUser.accessToken ?? nil)
+            KeychainManager.standard.saveRefreshToken(token: decodeUser.refreshToken ?? nil)
             
         } catch {
             print("❌ Error: \(error)")
@@ -232,8 +232,8 @@ final class ApiService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let decodeUser = try decoder.decode(UserResponse.self, from: data)
             
-            KeychainService.standard.saveAccessToken(token: decodeUser.accessToken ?? "")
-            KeychainService.standard.saveRefreshToken(token: decodeUser.refreshToken ?? "")
+            KeychainManager.standard.saveAccessToken(token: decodeUser.accessToken ?? "")
+            KeychainManager.standard.saveRefreshToken(token: decodeUser.refreshToken ?? "")
             
         } catch {
             throw error
@@ -316,7 +316,7 @@ final class ApiService {
         }
     }
     
-    func deleteUser() async throws {
+    func deleteUser() async throws -> Bool {
         guard let url = URL(string: "http://127.0.0.1:8000/api/users/me/") else {
             throw URLError(.badURL)
         }
@@ -326,6 +326,7 @@ final class ApiService {
         
         do {
             let (_, _) = try await NetworkService.shared.performRequest(request)
+            return true
         } catch {
             print("❌ Error delete user: \(error)")
             throw error

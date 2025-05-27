@@ -23,7 +23,7 @@ struct PasswordFieldView: View {
                     TextField(
                         "",
                         text: $password,
-                        prompt: Text(placeholder)
+                        prompt: Text(LocalizedStringKey(placeholder))
                             .foregroundColor(Color("PlaceHolderColor"))
                             .font(.custom("Montserrat-SemiBold", size: 16))
                     )
@@ -34,7 +34,7 @@ struct PasswordFieldView: View {
                     SecureField(
                         "",
                         text: $password,
-                        prompt: Text(placeholder)
+                        prompt: Text(LocalizedStringKey(placeholder))
                             .foregroundColor(Color("PlaceHolderColor"))
                             .font(.custom("Montserrat-SemiBold", size: 16))
                     )

@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct EditingProfileView: View {
+    
     @Binding var imageName: String
     @StateObject var viewModel = EditingProfileViewViewModel()
+    @EnvironmentObject var appState: AppState
+    @State private var isPresented: Bool = false
     
     var body: some View {
         VStack {
@@ -27,7 +30,7 @@ struct EditingProfileView: View {
                     .padding()
                 Picker("choosePhoto", selection: $imageName) {
                     ForEach(viewModel.availableImages, id: \ .self) { imageName in
-                        Text(imageName).tag(imageName)
+                        Text(LocalizedStringKey(imageName)).tag(imageName)
                     }
                 }
                 .onChange(of: imageName) { newValue in
@@ -39,6 +42,37 @@ struct EditingProfileView: View {
             }
             .background(Color("TextFieldBackround"))
             .cornerRadius(30)
+            
+            Button {
+                isPresented = true
+                
+            } label: {
+                Text("Delete account")
+                    .font(.custom("Montserrat-SemiBold", size: 15))
+                    .foregroundStyle(.white)
+                    .padding()
+                    .background(Color("TextFieldBackround"))
+                    .cornerRadius(8)
+                    .padding()
+            }
+            .alert("warning", isPresented: $isPresented) {
+                Button("cancel", role: .cancel) {}
+                Button("confirm", role: .destructive) {
+                    Task {
+                        do {
+                            if try await ApiService.shared.deleteUser() {
+                                appState.isLoggedIn = false
+                                CoreDataManager.shared.deleteUser()
+                                KeychainManager.standard.deleteAllTokens()
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            } message: {
+                Text("confirmDeleteAccount")
+            }
             
             Text("Change data")
                 .font(.custom("Montserrat-SemiBold", size: 30))

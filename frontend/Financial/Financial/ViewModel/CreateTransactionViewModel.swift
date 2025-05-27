@@ -14,7 +14,7 @@ class CreateTransactionViewModel: ObservableObject {
     
     let customFont = Font.custom("Montserrat-SemiBold", size: 20)
     let expenseCategories = ["products", "cafes_restaurants", "utilities_home", "entertainment", "devices", "transports", "animals", "beauty_health", "clothing_accessories", "charity", "other_sources_of_costs"]
-    let incomeCategories = ["business", "payments", "other_sources_of_income"]
+    let incomeCategories = ["business", "payments", "other_sources_of_incomes"]
     let paymentArray = ["card", "cash", "crypto", "otherPayment"]
     let emptyCategories = [""]
     
