@@ -15,7 +15,7 @@ struct BudgetFieldView: View {
             TextField(
                 "",
                 text: $budget,
-                prompt: Text("email")
+                prompt: Text("budget")
                     .foregroundColor(Color("PlaceHolderColor"))
                     .font(.custom("Montserrat-SemiBold", size: 16))
             )
