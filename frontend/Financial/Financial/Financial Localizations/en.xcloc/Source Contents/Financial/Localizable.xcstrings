@@ -1,0 +1,313 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "__________" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ - %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ - %2$@"
+          }
+        }
+      }
+    },
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
+          }
+        }
+      }
+    },
+    "%@ ₴%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ ₴%2$@"
+          }
+        }
+      }
+    },
+    "%@₴" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld:00" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "₴" : {
+
+    },
+    "02/24" : {
+
+    },
+    "accountExists" : {
+
+    },
+    "analytics" : {
+
+    },
+    "Back" : {
+
+    },
+    "cancel" : {
+
+    },
+    "category" : {
+
+    },
+    "category.animals" : {
+      "comment" : "Назва категорії тварини"
+    },
+    "category.beauty" : {
+      "comment" : "Назва категорії косметика"
+    },
+    "category.business" : {
+      "comment" : "Назва категорії бізнес"
+    },
+    "category.cafes" : {
+      "comment" : "Назва категорії Кафе"
+    },
+    "category.charity" : {
+      "comment" : "Назва категорії благодійність"
+    },
+    "category.clothing" : {
+      "comment" : "Назва категорії одяг"
+    },
+    "category.devices" : {
+      "comment" : "Назва категорії Девайси"
+    },
+    "category.entertainment" : {
+      "comment" : "Назва категорії розваги"
+    },
+    "category.other_costs" : {
+      "comment" : "Назва категорії інші витрати"
+    },
+    "category.other_payments" : {
+      "comment" : "Назва категорії інші доходи"
+    },
+    "category.payments" : {
+      "comment" : "Назва категорії виплати"
+    },
+    "category.products" : {
+      "comment" : "Назва категорії Продукти"
+    },
+    "category.transports" : {
+      "comment" : "Назва категорії транспорт"
+    },
+    "category.utilities" : {
+      "comment" : "Назва категорії Утиліти"
+    },
+    "Change Avatar" : {
+
+    },
+    "Change data" : {
+
+    },
+    "Change email" : {
+
+    },
+    "Change monthly budget" : {
+
+    },
+    "Choose a day" : {
+
+    },
+    "Choose month" : {
+
+    },
+    "Choose week" : {
+
+    },
+    "Choose year" : {
+
+    },
+    "chooseAvatar" : {
+
+    },
+    "choosePhoto" : {
+
+    },
+    "confirm" : {
+
+    },
+    "Confirm data changes" : {
+
+    },
+    "confirmLogOut" : {
+
+    },
+    "create" : {
+
+    },
+    "Data for categories not available" : {
+
+    },
+    "date" : {
+
+    },
+    "Date" : {
+
+    },
+    "delete" : {
+      "comment" : "Delete button"
+    },
+    "description" : {
+
+    },
+    "Done" : {
+
+    },
+    "Downloading recommendations..." : {
+
+    },
+    "editing" : {
+
+    },
+    "email" : {
+
+    },
+    "Error" : {
+
+    },
+    "Error: %@" : {
+
+    },
+    "Financial" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Hour" : {
+
+    },
+    "incorrectEmail" : {
+
+    },
+    "incorrectPassword" : {
+
+    },
+    "Invalid month or year" : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "login" : {
+
+    },
+    "logOut" : {
+
+    },
+    "logWith" : {
+
+    },
+    "newTransaction" : {
+
+    },
+    "Next" : {
+
+    },
+    "No transactions" : {
+
+    },
+    "noAccount" : {
+
+    },
+    "Not found data for display." : {
+
+    },
+    "OK" : {
+
+    },
+    "passwordsNotMatch" : {
+
+    },
+    "paymentMethod" : {
+
+    },
+    "statistics" : {
+
+    },
+    "There was an error on the server. Please try again in a few minutes." : {
+
+    },
+    "title" : {
+
+    },
+    "transactions" : {
+
+    },
+    "transactionsEmpty" : {
+      "comment" : "Message when transactions list is empty"
+    },
+    "Value" : {
+
+    },
+    "warning" : {
+
+    },
+    "yourBalance" : {
+
+    },
+    "День" : {
+
+    },
+    "Змінити період" : {
+
+    },
+    "Місяць" : {
+
+    },
+    "Оберіть дату" : {
+
+    },
+    "Оберіть день" : {
+
+    },
+    "Оберіть тип" : {
+
+    },
+    "Обраний період" : {
+
+    },
+    "Обрати період" : {
+
+    },
+    "Очистити форму" : {
+
+    },
+    "Тиждень" : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Financial/InfoPlist.xcstrings" source-language="en" target-language="uk" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.2" build-num="16C5032a"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Financial</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Financial/Localizable.xcstrings" source-language="en" target-language="uk" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.2" build-num="16C5032a"/>
+    </header>
+    <body>
+      <trans-unit id="" xml:space="preserve">
+        <source/>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@" xml:space="preserve">
+        <source>%@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ %lld" xml:space="preserve">
+        <source>%1$@ %2$lld</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ - %@" xml:space="preserve">
+        <source>%1$@ - %2$@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@ ₴%@" xml:space="preserve">
+        <source>%1$@ ₴%2$@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%@₴" xml:space="preserve">
+        <source>%@₴</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld" xml:space="preserve">
+        <source>%lld</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld / %lld" xml:space="preserve">
+        <source>%1$lld / %2$lld</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld%%" xml:space="preserve">
+        <source>%lld%%</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="%lld:00" xml:space="preserve">
+        <source>%lld:00</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="02/24" xml:space="preserve">
+        <source>02/24</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Back" xml:space="preserve">
+        <source>Back</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change Avatar" xml:space="preserve">
+        <source>Change Avatar</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change data" xml:space="preserve">
+        <source>Change data</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change email" xml:space="preserve">
+        <source>Change email</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Change monthly budget" xml:space="preserve">
+        <source>Change monthly budget</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose a day" xml:space="preserve">
+        <source>Choose a day</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose month" xml:space="preserve">
+        <source>Choose month</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose week" xml:space="preserve">
+        <source>Choose week</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Choose year" xml:space="preserve">
+        <source>Choose year</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Confirm data changes" xml:space="preserve">
+        <source>Confirm data changes</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Data for categories not available" xml:space="preserve">
+        <source>Data for categories not available</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Date" xml:space="preserve">
+        <source>Date</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Downloading recommendations..." xml:space="preserve">
+        <source>Downloading recommendations...</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Error" xml:space="preserve">
+        <source>Error</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Error: %@" xml:space="preserve">
+        <source>Error: %@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Financial" xml:space="preserve">
+        <source>Financial</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Hello, World!" xml:space="preserve">
+        <source>Hello, World!</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Hour" xml:space="preserve">
+        <source>Hour</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Invalid month or year" xml:space="preserve">
+        <source>Invalid month or year</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Key" xml:space="preserve">
+        <source>Key</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Next" xml:space="preserve">
+        <source>Next</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="No transactions" xml:space="preserve">
+        <source>No transactions</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Not found data for display." xml:space="preserve">
+        <source>Not found data for display.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="OK" xml:space="preserve">
+        <source>OK</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="There was an error on the server. Please try again in a few minutes." xml:space="preserve">
+        <source>There was an error on the server. Please try again in a few minutes.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Value" xml:space="preserve">
+        <source>Value</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="__________" xml:space="preserve">
+        <source>__________</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="accountExists" xml:space="preserve">
+        <source>accountExists</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="analytics" xml:space="preserve">
+        <source>analytics</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="cancel" xml:space="preserve">
+        <source>cancel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category" xml:space="preserve">
+        <source>category</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category.animals" xml:space="preserve">
+        <source>category.animals</source>
+        <note>Назва категорії тварини</note>
+      </trans-unit>
+      <trans-unit id="category.beauty" xml:space="preserve">
+        <source>category.beauty</source>
+        <note>Назва категорії косметика</note>
+      </trans-unit>
+      <trans-unit id="category.business" xml:space="preserve">
+        <source>category.business</source>
+        <note>Назва категорії бізнес</note>
+      </trans-unit>
+      <trans-unit id="category.cafes" xml:space="preserve">
+        <source>category.cafes</source>
+        <note>Назва категорії Кафе</note>
+      </trans-unit>
+      <trans-unit id="category.charity" xml:space="preserve">
+        <source>category.charity</source>
+        <note>Назва категорії благодійність</note>
+      </trans-unit>
+      <trans-unit id="category.clothing" xml:space="preserve">
+        <source>category.clothing</source>
+        <note>Назва категорії одяг</note>
+      </trans-unit>
+      <trans-unit id="category.devices" xml:space="preserve">
+        <source>category.devices</source>
+        <note>Назва категорії Девайси</note>
+      </trans-unit>
+      <trans-unit id="category.entertainment" xml:space="preserve">
+        <source>category.entertainment</source>
+        <note>Назва категорії розваги</note>
+      </trans-unit>
+      <trans-unit id="category.other_costs" xml:space="preserve">
+        <source>category.other_costs</source>
+        <note>Назва категорії інші витрати</note>
+      </trans-unit>
+      <trans-unit id="category.other_payments" xml:space="preserve">
+        <source>category.other_payments</source>
+        <note>Назва категорії інші доходи</note>
+      </trans-unit>
+      <trans-unit id="category.payments" xml:space="preserve">
+        <source>category.payments</source>
+        <note>Назва категорії виплати</note>
+      </trans-unit>
+      <trans-unit id="category.products" xml:space="preserve">
+        <source>category.products</source>
+        <note>Назва категорії Продукти</note>
+      </trans-unit>
+      <trans-unit id="category.transports" xml:space="preserve">
+        <source>category.transports</source>
+        <note>Назва категорії транспорт</note>
+      </trans-unit>
+      <trans-unit id="category.utilities" xml:space="preserve">
+        <source>category.utilities</source>
+        <note>Назва категорії Утиліти</note>
+      </trans-unit>
+      <trans-unit id="chooseAvatar" xml:space="preserve">
+        <source>chooseAvatar</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="choosePhoto" xml:space="preserve">
+        <source>choosePhoto</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="confirm" xml:space="preserve">
+        <source>confirm</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="confirmLogOut" xml:space="preserve">
+        <source>confirmLogOut</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="create" xml:space="preserve">
+        <source>create</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="date" xml:space="preserve">
+        <source>date</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="delete" xml:space="preserve">
+        <source>delete</source>
+        <note>Delete button</note>
+      </trans-unit>
+      <trans-unit id="description" xml:space="preserve">
+        <source>description</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="editing" xml:space="preserve">
+        <source>editing</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="email" xml:space="preserve">
+        <source>email</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="incorrectEmail" xml:space="preserve">
+        <source>incorrectEmail</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="incorrectPassword" xml:space="preserve">
+        <source>incorrectPassword</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="logOut" xml:space="preserve">
+        <source>logOut</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="logWith" xml:space="preserve">
+        <source>logWith</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="login" xml:space="preserve">
+        <source>login</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="newTransaction" xml:space="preserve">
+        <source>newTransaction</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="noAccount" xml:space="preserve">
+        <source>noAccount</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="passwordsNotMatch" xml:space="preserve">
+        <source>passwordsNotMatch</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="paymentMethod" xml:space="preserve">
+        <source>paymentMethod</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="statistics" xml:space="preserve">
+        <source>statistics</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="title" xml:space="preserve">
+        <source>title</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="transactions" xml:space="preserve">
+        <source>transactions</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="transactionsEmpty" xml:space="preserve">
+        <source>transactionsEmpty</source>
+        <note>Message when transactions list is empty</note>
+      </trans-unit>
+      <trans-unit id="warning" xml:space="preserve">
+        <source>warning</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="yourBalance" xml:space="preserve">
+        <source>yourBalance</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="День" xml:space="preserve">
+        <source>День</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Змінити період" xml:space="preserve">
+        <source>Змінити період</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Місяць" xml:space="preserve">
+        <source>Місяць</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть дату" xml:space="preserve">
+        <source>Оберіть дату</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть день" xml:space="preserve">
+        <source>Оберіть день</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Оберіть тип" xml:space="preserve">
+        <source>Оберіть тип</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Обраний період" xml:space="preserve">
+        <source>Обраний період</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Обрати період" xml:space="preserve">
+        <source>Обрати період</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Очистити форму" xml:space="preserve">
+        <source>Очистити форму</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Тиждень" xml:space="preserve">
+        <source>Тиждень</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="₴" xml:space="preserve">
+        <source>₴</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
