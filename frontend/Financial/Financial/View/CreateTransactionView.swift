@@ -60,7 +60,7 @@ struct TransactionInputFieldsView: View {
             }
 
             TextField("", text: $viewModel.title, prompt:
-                Text("title")
+                Text(LocalizedStringKey("title"))
                     .foregroundColor(Color.white)
                     .font(viewModel.customFont)
             )
@@ -81,7 +81,7 @@ struct TransactionInputFieldsView: View {
                     .cornerRadius(30)
 
                 if viewModel.descriptionText.isEmpty {
-                    Text("description")
+                    Text(LocalizedStringKey("description"))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .padding(.top, 20)
@@ -91,7 +91,7 @@ struct TransactionInputFieldsView: View {
             }
 
             HStack {
-                Text("category")
+                Text(LocalizedStringKey("category"))
                     .foregroundColor(.white)
                     .font(viewModel.customFont)
                     .padding(.leading)
@@ -113,7 +113,7 @@ struct TransactionInputFieldsView: View {
             .cornerRadius(30)
 
             HStack {
-                Text("paymentMethod")
+                Text(LocalizedStringKey("paymentMethod"))
                     .foregroundColor(.white)
                     .font(viewModel.customFont)
                     .padding(.leading)
@@ -135,7 +135,7 @@ struct TransactionInputFieldsView: View {
             .cornerRadius(30)
 
             HStack {
-                Text("date")
+                Text(LocalizedStringKey("date"))
                     .foregroundColor(.white)
                     .font(viewModel.customFont)
                     .padding(.leading)
@@ -154,7 +154,7 @@ struct TransactionInputFieldsView: View {
              .cornerRadius(30)
 
             
-            Button("cleanForm") {
+            Button(LocalizedStringKey("cleanForm")) {
                 viewModel.resetForm()
             }
             .foregroundColor(.red)

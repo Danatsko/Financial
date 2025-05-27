@@ -34,9 +34,9 @@ class ProfileViewViewModel: ObservableObject {
         }
     }
     
-    func logout() async -> Bool {
-        KeychainService.standard.deleteAccessToken()
-        KeychainService.standard.deleteRefreshToken()
+    func logout() -> Bool {
+        KeychainManager.standard.deleteAccessToken()
+        KeychainManager.standard.deleteRefreshToken()
         return true
     }
 }

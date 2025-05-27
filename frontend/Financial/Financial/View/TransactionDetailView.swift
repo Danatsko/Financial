@@ -35,7 +35,7 @@ struct TransactionDetailView: View {
                 Button {
                     viewModel.path.append(TransactionRoute.edit(viewModel.transaction))
                 } label: {
-                    Text("editing")
+                    Text("Editing")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .padding()
                         .foregroundColor(.white)
@@ -50,7 +50,7 @@ struct TransactionDetailView: View {
                 
             }
             .padding()
-            .navigationTitle(viewModel.transaction.type ?? "No value")
+            .navigationTitle(viewModel.transaction.type == "incomes" ? LocalizedStringKey("Incomes") : LocalizedStringKey("Expenses"))
         }
         .toolbar(.hidden, for: .tabBar)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

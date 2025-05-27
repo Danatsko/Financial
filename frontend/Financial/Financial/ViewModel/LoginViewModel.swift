@@ -54,6 +54,7 @@ class LoginViewModel: ObservableObject {
             if try await ApiService.shared.getUserInfo() {
                 try await ApiService.shared.getTransactionsData()
                 try await ApiService.shared.getAchievements()
+                return true
             }
         } catch let error as NetworkError {
             
@@ -76,6 +77,6 @@ class LoginViewModel: ObservableObject {
             }
             return false
         }
-        return true
+        return false
     }
 }

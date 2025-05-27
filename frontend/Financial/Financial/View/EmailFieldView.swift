@@ -17,7 +17,7 @@ struct EmailFieldView: View {
             TextField(
                 "",
                 text: $email,
-                prompt: Text("email")
+                prompt: Text(LocalizedStringKey("email"))
                     .foregroundColor(Color("PlaceHolderColor"))
                     .font(.custom("Montserrat-SemiBold", size: 16))
             )
@@ -41,7 +41,7 @@ struct EmailFieldView: View {
             .cornerRadius(8)
             
             if !isValidEmail {
-                Text("incorrectEmail")
+                Text(LocalizedStringKey("incorrectEmail"))
                     .font(.caption)
                     .foregroundColor(.red)
             }

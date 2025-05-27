@@ -14,30 +14,9 @@ class TransactionEditViewModel: ObservableObject {
     @Binding var path: NavigationPath
     
     let customFont = Font.custom("Montserrat-SemiBold", size: 20)
-    let costsCategories = [
-        "groceries",
-        "cafes",
-        "utilities",
-        "entertainment",
-        "equipment",
-        "transportation",
-        "animals",
-        "health",
-        "clothing",
-        "charity",
-        "otherExpensen"
-    ]
-    let paymentArray = [
-        "card",
-        "cash",
-        "crypto",
-        "otherPayment"
-    ]
-    let incomeCategories = [
-        "business",
-        "payments",
-        "otherIncome"
-    ]
+    let costsCategories = ["products", "cafes_restaurants", "utilities_home", "entertainment", "devices", "transports", "animals", "beauty_health", "clothing_accessories", "charity", "other_sources_of_costs"]
+    let paymentArray = ["card", "cash", "crypto", "otherPayment"]
+    let incomeCategories = ["business", "payments", "other_sources_of_incomes"]
     
     @Published var title: String
     @Published var descriptionText: String = ""
@@ -77,7 +56,7 @@ class TransactionEditViewModel: ObservableObject {
     }
     
     func selectoryCategory() -> [String] {
-        transaction.type == "Доходи" ? incomeCategories : costsCategories
+        transaction.type == "incomes" ? incomeCategories : costsCategories
     }
     
     private func updatePickedCategory() {

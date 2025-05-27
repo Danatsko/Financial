@@ -17,7 +17,7 @@ class NetworkService {
         var currentRequest = request
         
         if requiresAuth {
-            if let accessToken = KeychainService.standard.getAccessToken() {
+            if let accessToken = KeychainManager.standard.getAccessToken() {
                 if currentRequest.value(forHTTPHeaderField: "Authorization") == nil {
                     currentRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                 }
@@ -41,7 +41,7 @@ class NetworkService {
             do {
                 try await tokenRefresher.refreshToken()
                 
-                guard let newAccessToken = KeychainService.standard.getAccessToken() else {
+                guard let newAccessToken = KeychainManager.standard.getAccessToken() else {
                     throw NetworkError.refreshFailed(nil)
                 }
                 

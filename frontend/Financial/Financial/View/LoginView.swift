@@ -36,8 +36,6 @@ struct LoginView: View {
             .disabled(viewModel.isAvaibleLogin())
             .opacity(viewModel.isAvaibleLogin() ? 0.5 : 1.0)
             
-            OrDividerView()
-            
             HStack {
                 Text("noAccount")
                     .font(.custom("Montserrat-SemiBold", size: 14))

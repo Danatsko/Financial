@@ -22,7 +22,7 @@ actor TokenRefresher {
         
         defer { isRefreshing = false }
         
-        guard let refreshToken = KeychainService.standard.getRefreshToken() else {
+        guard let refreshToken = KeychainManager.standard.getRefreshToken() else {
             throw NetworkError.refreshFailed(nil)
         }
         
@@ -52,8 +52,8 @@ actor TokenRefresher {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let refreshTokenResponse = try decoder.decode(UserResponse.self, from: data)
-                    KeychainService.standard.saveAccessToken(token: refreshTokenResponse.accessToken)
-                    KeychainService.standard.saveRefreshToken(token: refreshTokenResponse.refreshToken)
+                    KeychainManager.standard.saveAccessToken(token: refreshTokenResponse.accessToken)
+                    KeychainManager.standard.saveRefreshToken(token: refreshTokenResponse.refreshToken)
                     return
                 } catch {
                     throw NetworkError.decodingError(error)

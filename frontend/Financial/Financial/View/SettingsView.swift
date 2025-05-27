@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @EnvironmentObject var languageSettings: LanguageSettings
 
-#Preview {
-    SettingsView()
+    var body: some View {
+        VStack {
+            Text("Select Language")
+                .font(.headline)
+
+            Picker("Language", selection: $languageSettings.language) {
+                Text("English").tag("en")
+                Text("Українська").tag("uk")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Settings")
+    }
 }

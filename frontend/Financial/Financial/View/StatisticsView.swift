@@ -12,6 +12,7 @@ struct StatisticsView: View {
     
     @ObservedObject var navigationService = NavigationServiceStatistics.shared
     @State var isPresentedTransaction: Bool = false
+    @State private var pdfURL: URL?
     
     var body: some View {
         NavigationStack(path: $navigationService.statisticsPath) {
@@ -31,7 +32,7 @@ struct StatisticsView: View {
                         }
                         VStack {
                             if viewModel.isDateSelected {
-                                Text("Обраний період")
+                                Text("selectedPeriod")
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-Bold", size: 20))
                                     .padding()
@@ -56,7 +57,7 @@ struct StatisticsView: View {
                                 Button {
                                     viewModel.isDateSelected.toggle()
                                 } label: {
-                                    Text("Змінити період")
+                                    Text("changePeriod")
                                 }
                                 
                                 
@@ -103,6 +104,25 @@ struct StatisticsView: View {
                                     .foregroundColor(.white)
                                 
                                 Spacer()
+                                
+                                Button {
+                                    viewModel.generateStatisticsPDF()
+                                    self.pdfURL = viewModel.pdfReportURL
+                                } label: {
+                                    Image(systemName: "doc.text.fill")
+                                        .font(.title2)
+                                }
+                                .foregroundColor(viewModel.canGeneratePDF ? .white : .gray)
+                                .disabled(!viewModel.canGeneratePDF)
+                                
+                                if let url = pdfURL {
+                                    ShareLink(item: url) {
+                                        Image(systemName: "square.and.arrow.up")
+                                            .font(.title2)
+                                    }
+                                    .padding(.leading, 10)
+                                    .foregroundColor(.white)
+                                }
                             }
                             
                             StatisticsCharts(
@@ -124,10 +144,10 @@ struct StatisticsView: View {
                             
                             Spacer()
                         } else {
-                            Text("Оберіть тип")
+                            Text("Choose type")
                         }
                     } else {
-                        Text("Оберіть дату")
+                        Text("Choose date")
                     }
                 }
             }
