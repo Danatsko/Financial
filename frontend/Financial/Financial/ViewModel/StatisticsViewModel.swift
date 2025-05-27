@@ -6,6 +6,47 @@
 //  Copyright (c) 2025 Financial
 
 import Foundation
+import SwiftUI
+import UIKit
+
+@MainActor
+func generatePDF<V: View>(@ViewBuilder content: () -> V) -> URL? {
+    let view = content().environment(\.colorScheme, .light)
+
+    let hostingController = UIHostingController(rootView: view)
+    let pageRect = CGRect(x: 0, y: 0, width: 595, height: 842)
+
+    hostingController.view.frame = pageRect
+    hostingController.view.backgroundColor = .white
+
+    hostingController.view.setNeedsLayout()
+    hostingController.view.layoutIfNeeded()
+
+    let renderer = UIGraphicsPDFRenderer(bounds: pageRect)
+    let url = FileManager.default.temporaryDirectory.appendingPathComponent("StatisticsReport-\(UUID().uuidString).pdf")
+
+    do {
+        try renderer.writePDF(to: url) { context in
+            context.beginPage()
+
+            hostingController.view.drawHierarchy(in: pageRect, afterScreenUpdates: true)
+
+        }
+        print("PDF згенеровано (спроба з drawHierarchy): \(url.path)")
+        return url
+    } catch {
+        print("Не вдалося згенерувати PDF: \(error.localizedDescription)")
+        return nil
+    }
+}
+
+struct PDFStatisticsData {
+    let period: String
+    let type: String
+    let totalAmount: Double
+    let categories: [(name: String, percentage: Double, transactions: [TransactionApi])]
+    let chartData: [String: Double]
+}
 
 
 @MainActor
@@ -33,11 +74,16 @@ class StatisticsViewModel: ObservableObject {
     @Published var categoryName: String = ""
     
     
-    
     @Published var months: [String] = [
         "january", "february", "march", "april", "may", "june",
         "july", "august", "september", "october", "november", "december"
     ]
+    
+    @Published var pdfReportURL: URL? = nil
+    
+    var canGeneratePDF: Bool {
+        return isDateSelected && isTypeSelected && !selectoryType().isEmpty
+    }
     
     init() {
         years = Array(yearInDate()...Calendar.current.component(.year, from: Date()))
@@ -254,6 +300,41 @@ class StatisticsViewModel: ObservableObject {
                 transactions: categoryInfo.transactions
             )
         }.sorted { $0.localizedName < $1.localizedName }
+    }
+    
+    func formattedPeriod() -> String {
+        switch typePeriod {
+        case .day:
+            return getFormattedDayDate()
+        case .week:
+            return "\(getFormattedWeekDate(at: 0)) - \(getFormattedWeekDate(at: 1))"
+        case .month:
+            return "\(selectedMonth) \(selectedYear)"
+        }
+    }
+    
+    func generateStatisticsPDF() {
+        guard canGeneratePDF else { return }
+        
+        let categoriesData: [(name: String, percentage: Double, transactions: [TransactionApi])]
+        if type == "incomes" {
+            categoriesData = displayableCategoriesIncomes.map { ($0.localizedName, $0.percentage, $0.transactions) }
+        } else {
+            categoriesData = displayableCategoriesCosts.map { ($0.localizedName, $0.percentage, $0.transactions) }
+        }
+        
+        let pdfData = PDFStatisticsData(
+            period: formattedPeriod(),
+            type: type == "incomes" ? "Доходи" : "Витрати",
+            totalAmount: type == "incomes" ? amountIncomes : amountCosts,
+            categories: categoriesData,
+            chartData: selectoryType()
+        )
+        
+        // Викликаємо глобальну функцію генерації
+        self.pdfReportURL = generatePDF {
+            StatisticsPDFView(data: pdfData)
+        }
     }
 }
 
