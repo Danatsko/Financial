@@ -40,6 +40,9 @@
         }
       }
     },
+    "%@%%" : {
+
+    },
     "%@₴" : {
 
     },
@@ -306,13 +309,40 @@
       }
     },
     "Change Avatar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Avatar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Змінити аватар"
+          }
+        }
+      }
     },
     "Change data" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Змінити дані"
+          }
+        }
+      }
     },
     "Change email" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Змінити пошту"
+          }
+        }
+      }
     },
     "Change monthly budget" : {
       "localizations" : {
@@ -325,7 +355,23 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Оберіть місячний бюджет"
+            "value" : "Змінити місячний бюджет"
+          }
+        }
+      }
+    },
+    "changePeriod" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change period"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Змінити період"
           }
         }
       }
@@ -363,6 +409,22 @@
         }
       }
     },
+    "Choose date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose date"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оберіть дату"
+          }
+        }
+      }
+    },
     "Choose month" : {
       "localizations" : {
         "en" : {
@@ -395,6 +457,22 @@
         }
       }
     },
+    "Choose type" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose type"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оберіть тип"
+          }
+        }
+      }
+    },
     "Choose week" : {
       "localizations" : {
         "en" : {
@@ -413,19 +491,51 @@
     },
     "Choose year" : {
       "localizations" : {
-        "uk" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose yer"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Оберіть рік"
           }
         }
       }
     },
     "chooseAvatar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose avatar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оберіть аватар"
+          }
+        }
+      }
     },
     "choosePhoto" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose photo"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оберіть фото"
+          }
+        }
+      }
     },
     "cleanForm" : {
       "localizations" : {
@@ -492,6 +602,22 @@
         }
       }
     },
+    "confirmDeleteAccount" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to delete your account?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви дійсно хочете видалити свій обліковий запис?"
+          }
+        }
+      }
+    },
     "confirmLogOut" : {
       "localizations" : {
         "en" : {
@@ -504,6 +630,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ви дійсно хочете вийти з облікового запису?"
+          }
+        }
+      }
+    },
+    "confirmPassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "confirm password"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "підтвердіть пароль"
           }
         }
       }
@@ -650,6 +793,16 @@
         }
       }
     },
+    "Delete account" : {
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити акаунт"
+          }
+        }
+      }
+    },
     "description" : {
       "localizations" : {
         "en" : {
@@ -700,7 +853,36 @@
       }
     },
     "editing" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editing"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Редагувати"
+          }
+        }
+      }
+    },
+    "Editing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editing"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редагувати"
+          }
+        }
+      }
     },
     "editingProfile" : {
       "extractionState" : "manual",
@@ -726,8 +908,17 @@
             "state" : "translated",
             "value" : "email"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пошта"
+          }
         }
       }
+    },
+    "English" : {
+
     },
     "enterBudget" : {
       "extractionState" : "manual",
@@ -777,6 +968,20 @@
         }
       }
     },
+    "Expense" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Витрати"
+          }
+        }
+      }
+    },
+    "Expenses" : {
+
+    },
     "february" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -796,6 +1001,40 @@
     },
     "Financial" : {
 
+    },
+    "firstBoy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Boy"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перший хлопець"
+          }
+        }
+      }
+    },
+    "firstGirl" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Girl"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перша дівчина"
+          }
+        }
+      }
     },
     "greeting.reportReady" : {
       "extractionState" : "manual",
@@ -871,11 +1110,70 @@
         }
       }
     },
+    "incomes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incomes"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доходи"
+          }
+        }
+      }
+    },
+    "Incomes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incomes"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доходи"
+          }
+        }
+      }
+    },
     "incorrectEmail" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "incorrect email"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "неправильна пошта"
+          }
+        }
+      }
     },
     "incorrectPassword" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "incorrect password"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "неправильний пароль"
+          }
+        }
+      }
     },
     "Invalid month or year" : {
       "localizations" : {
@@ -938,6 +1236,9 @@
         }
       }
     },
+    "Language" : {
+
+    },
     "login" : {
       "localizations" : {
         "en" : {
@@ -971,6 +1272,7 @@
       }
     },
     "logWith" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1168,6 +1470,23 @@
         }
       }
     },
+    "other_sources_of_incomes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other Income Sources"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інші джерела доходу"
+          }
+        }
+      }
+    },
     "otherPayment" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1193,11 +1512,30 @@
             "state" : "translated",
             "value" : "password"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
+          }
         }
       }
     },
     "passwordsNotMatch" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "password not match"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Паролі не співпадають"
+          }
+        }
+      }
     },
     "paymentMethod" : {
       "localizations" : {
@@ -1221,12 +1559,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Payouts"
+            "value" : "Payments"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Виплати"
           }
         }
@@ -1351,6 +1689,59 @@
         }
       }
     },
+    "secondBoy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second Boy"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Другий хлопець"
+          }
+        }
+      }
+    },
+    "secondGirl" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second Girl"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Друга дівчина"
+          }
+        }
+      }
+    },
+    "Select Language" : {
+
+    },
+    "selectedPeriod" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected period"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обраний період"
+          }
+        }
+      }
+    },
     "september" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1385,6 +1776,9 @@
         }
       }
     },
+    "Settings" : {
+
+    },
     "statistics" : {
       "localizations" : {
         "en" : {
@@ -1411,6 +1805,40 @@
         }
       }
     },
+    "thirdBoy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third Boy"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Третій хлопець"
+          }
+        }
+      }
+    },
+    "thirdGirl" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third Girl"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Третя дівчина"
+          }
+        }
+      }
+    },
     "title" : {
       "localizations" : {
         "en" : {
@@ -1421,7 +1849,7 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Назва"
           }
         }
@@ -1630,19 +2058,31 @@
         }
       }
     },
-    "Змінити період" : {
+    "Загальна сума: %@" : {
 
     },
-    "Оберіть дату" : {
+    "Звіт" : {
+
+    },
+    "Згенеровано: %@" : {
+
+    },
+    "Немає даних по категоріях." : {
 
     },
     "Оберіть день" : {
 
     },
-    "Оберіть тип" : {
+    "Період: %@" : {
 
     },
-    "Обраний період" : {
+    "Розподіл по категоріях:" : {
+
+    },
+    "Тип: %@" : {
+
+    },
+    "Українська" : {
 
     }
   },
