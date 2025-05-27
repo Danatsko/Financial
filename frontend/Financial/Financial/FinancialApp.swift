@@ -11,24 +11,27 @@ import SwiftUI
 struct FinancialApp: App {
     
     @StateObject var appState = AppState()
+    @StateObject var languageSettings = LanguageSettings()
     let coreDataManager = CoreDataManager.shared
     
     var body: some Scene {
         WindowGroup {
-            if appState.isLoggedIn {
-                MainView()
-                    .environmentObject(appState)
-                    .preferredColorScheme(.dark)
-                    .environment(\.managedObjectContext, coreDataManager.context)
-            } else {
-                StartView()
-                    .environmentObject(appState)
-                    .preferredColorScheme(.dark)
+            Group {
+                if appState.isLoggedIn {
+                    MainView()
+                        .environment(\.managedObjectContext, coreDataManager.context)
+                } else {
+                    StartView()
+                }
             }
+            .environmentObject(appState)
+            .environmentObject(languageSettings)
+            .preferredColorScheme(.dark)
+            .environment(\.locale, .init(identifier: languageSettings.language))
         }
     }
 }
 
 class AppState: ObservableObject {
-    @Published var isLoggedIn = KeychainService.standard.getRefreshToken() != nil
+    @Published var isLoggedIn = KeychainManager.standard.getRefreshToken() != nil
 }
